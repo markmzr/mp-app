@@ -1,0 +1,46 @@
+.grid-container {
+    display: grid;
+    justify-content: center;
+}
+
+.header {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 40px;
+	margin-top: 100px;
+	text-align: center;
+}
+.keywords {
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-right: 5px;
+    padding: 5px;
+    width: 260px;
+}
+
+.city {
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-right: 5px;
+    padding: 5px;
+    width: 160px;
+}
+
+.search {
+    background-color: #4F6DA1;
+    border: 1px solid;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    padding: 5px;
+    width: 80px;
+}
+
+.search:hover {
+    background-color: #5B7FBD;
+}

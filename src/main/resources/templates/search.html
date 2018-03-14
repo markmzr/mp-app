@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Marketplace Web Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+<body>
+<div class="grid-container">
+	<h1 class ="header">Marketplace</h1>
+		<form action="#" th:action="@{/search}" th:object="${search}" method="post">
+			<div><input type="text" th:field="*{keywords}" class="keywords" placeholder="Keywords"/>
+				<input type="text" th:field="*{city}" class="city" placeholder="City"/>
+				<input type="submit" class = "search" value="Search" /></div>
+		</form>
+</div>
+</body>
+</html>
