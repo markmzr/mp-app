@@ -1,12 +1,46 @@
+.menu {
+    grid-area: menu;
+}
+
+.main {
+    grid-area: main;
+    margin: auto;
+}
+
 .grid-container {
     display: grid;
-    justify-content: center;
+    grid-template-areas:
+        'menu'
+        'main';
+}
+
+a:link, a:visited {
+    color: black;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    color: black;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.navbar {
+    padding: 10px;
+}
+
+.navbar > span {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .header {
 	font-family: Tahoma, Geneva, sans-serif;
 	font-size: 40px;
-	margin-top: 100px;
+	margin-top: 60px;
 	text-align: center;
 }
 .keywords {

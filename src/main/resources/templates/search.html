@@ -1,5 +1,6 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Marketplace Web Application</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,12 +8,24 @@
 </head>
 <body>
 <div class="grid-container">
-	<h1 class ="header">Marketplace</h1>
+    <div class="menu">
+        <div class="navbar">
+            <span><a href="/">Home</a></span>
+            <span><a th:href="@{/myaccount}">My Account</a></span>
+            <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}">Create Account</a></span>
+            <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}">Sign Out</a></span>
+        </div>
+    </div>
+    <div class="main">
+    <h1 class ="header">Marketplace</h1>
 		<form action="#" th:action="@{/results}" th:object="${search}" method="get">
-			<div><input type="text" th:field="*{keywords}" class="keywords" placeholder="Keywords"/>
-				<input type="text" th:field="*{city}" class="city" placeholder="City"/>
-				<input type="submit" class = "search" value="Search"/></div>
+			<div>
+                <input type="text" th:field="*{keywords}" class="keywords" placeholder="Keywords"/>
+                <input type="text" th:field="*{city}" class="city" placeholder="City"/>
+				<input type="submit" class="search" value="Search"/>
+            </div>
 		</form>
+    </div>
 </div>
 </body>
 </html>
