@@ -1,16 +1,29 @@
 package marketplace;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import marketplace.models.Item;
+import marketplace.models.User;
+import marketplace.services.ItemService;
+import marketplace.services.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
 @Controller
 public class WebController {
+    @Autowired
+    private ItemService itemService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String index() {
@@ -19,14 +32,13 @@ public class WebController {
 
     @GetMapping("/search")
     public String search(Model model) {
-        model.addAttribute("search", new Search());
+        model.addAttribute("keywords", new Item());
         return "search";
     }
 
     @GetMapping("/results")
-    public String results(Model model, @ModelAttribute Search search) {
-        Sql sql = new Sql();
-        List<Item> items = sql.readItems(search.getKeywords());
+    public String results(Model model, @ModelAttribute Item item) {
+        List<Item> items = itemService.findItems(item);
         model.addAttribute("items", items);
         return "results";
     }
@@ -39,38 +51,20 @@ public class WebController {
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
-        List<Error> errors = new ArrayList<>();
-        model.addAttribute("errors", errors);
         return "register";
     }
 
     @PostMapping("/register")
-    public String checkRegistration(Model model, @ModelAttribute User user) {
-        if (!user.validUsername() || !user.validPassword()) {
-            List<Error> errors = new ArrayList<>();
-
-            if (!user.validUsername()) {
-                errors.add(new Error("Username must be between 2 and 30 characters"));
-            }
-
-            if (!user.validPassword()) {
-                errors.add(new Error("Password must be between 2 and 30 characters"));
-            }
-
-            model.addAttribute("errors", errors);
+    public String checkRegistration(@Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "register";
         }
-
-        Sql sql = new Sql();
-        if (sql.userExists(user)) {
-            List<Error> errors = new ArrayList<>();
-            Error error = new Error("Username already exists");
-            errors.add(error);
-            model.addAttribute("errors", errors);
+        if (userService.userExists(user)) {
+            bindingResult.rejectValue("username", "error.username", "An account with that username already exists");
             return "register";
         }
         else {
-            sql.createUser(user);
+            userService.saveUser(user);
             return "registersuccess";
         }
     }

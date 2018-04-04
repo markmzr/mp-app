@@ -24,8 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select Username, Password, Enabled from Users where Username=?")
-                .authoritiesByUsernameQuery("select Username, Role from Roles where Username=?")
+                .usersByUsernameQuery("select username, password, enabled from user where username=?")
+                .authoritiesByUsernameQuery("select username, role from role where username=?")
                 .passwordEncoder(passwordEncoder);
     }
 

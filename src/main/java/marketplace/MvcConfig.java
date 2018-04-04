@@ -1,8 +1,10 @@
 package marketplace;
 
+import javax.sql.DataSource;
+
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -20,12 +22,13 @@ public class MvcConfig implements WebMvcConfigurer {
     }
 
     @Bean(name = "dataSource")
-    public DriverManagerDataSource dataSource() {
-        DriverManagerDataSource dmds = new DriverManagerDataSource();
-        dmds.setUrl(System.getenv("DB_URL"));
-        dmds.setUsername(System.getenv("USERNAME"));
-        dmds.setPassword(System.getenv("PASSWORD"));
-        return dmds;
+    public DataSource dataSource() {
+        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        dataSourceBuilder.url(System.getenv("DB_URL"));
+        dataSourceBuilder.username(System.getenv("USERNAME"));
+        dataSourceBuilder.password(System.getenv("PASSWORD"));
+        DataSource dataSource = dataSourceBuilder.build();
+        return dataSource;
     }
 
     @Bean(name = "passwordEncoder")

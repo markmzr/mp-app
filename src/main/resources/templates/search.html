@@ -17,10 +17,9 @@
     </div>
     <div class="main">
     <h1 class ="header">Marketplace</h1>
-		<form action="#" th:action="@{/results}" th:object="${search}" method="get">
+		<form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
 			<div>
-                <input type="text" th:field="*{keywords}" class="keywords" placeholder="Keywords"/>
-                <input type="text" th:field="*{city}" class="city" placeholder="City"/>
+                <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
 				<input type="submit" class="search" value="Search"/>
             </div>
 		</form>
