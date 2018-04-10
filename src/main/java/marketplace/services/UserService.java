@@ -28,6 +28,7 @@ public class UserService {
         Role role = new Role(user.getUsername(), "User");
         roleRepository.save(role);
     }
+
     public Boolean userExists(User user) {
         if (userRepository.findByUsername(user.getUsername()) != null) {
             return true;

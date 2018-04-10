@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>My Account</title>
-    <link rel="stylesheet" type="text/css" href="myaccount.css">
+    <title>Add Item</title>
+    <link rel="stylesheet" type="text/css" href="additem.css">
 </head>
 <body>
 <div class="grid-container">
@@ -22,21 +22,16 @@
                 <input type="submit" class="search" value="Search"/>
             </div>
         </form>
-        <h1 class="myaccount">My Account</h1>
-        <a th:href="@{/additem}">Add Item</a>
-        <h1 class="myitems">My Items</h1>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-            </tr>
-            <tr th:each="item : ${items}">
-                <td th:text="${item.name}"></td>
-                <td th:text="${item.description}"></td>
-                <td><a th:href="@{'/edititem/' + ${item.id}}">Edit Item</a></td>
-                <td><a th:href="@{'/removeitem/' + ${item.id}}">Remove Item</a></td>
-            </tr>
-        </table>
+        <h1 class="header">Add Item</h1>
+        <form action="#" th:action="@{/additem}" th:object="${item}" method="post">
+            <div>
+                <input type="text" th:field="*{name}" class="name" placeholder="Name"/><br />
+                <textarea th:field="*{description}" class="description" placeholder="Description"></textarea>
+            </div>
+            <div class="button">
+                <input type="submit" class="additem" value="Add Item"/>
+            </div>
+        </form>
     </div>
 </div>
 </body>

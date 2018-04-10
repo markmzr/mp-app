@@ -5,6 +5,7 @@
 .main {
     grid-area: main;
     margin: auto;
+    text-align: center;
 }
 
 .grid-container {
@@ -39,28 +40,19 @@ a:hover, a:active {
 
 .header {
 	font-family: Tahoma, Geneva, sans-serif;
-	font-size: 40px;
+	font-size: 24px;
 	margin-top: 60px;
-	text-align: center;
 }
+
 .keywords {
     border: 1px solid;
     border-radius: 3px;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 14px;
     margin-right: 5px;
+    margin-top: 10px;
     padding: 5px;
-    width: 260px;
-}
-
-.city {
-    border: 1px solid;
-    border-radius: 3px;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-right: 5px;
-    padding: 5px;
-    width: 160px;
+    width: 800px;
 }
 
 .search {
@@ -71,6 +63,7 @@ a:hover, a:active {
     cursor: pointer;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 14px;
+    margin-top: 10px;
     padding: 5px;
     width: 80px;
 }
@@ -78,3 +71,47 @@ a:hover, a:active {
 .search:hover {
     background-color: #5B7FBD;
 }
+
+.name {
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-top: 15px;
+    padding: 5px;
+    width: 600px;
+}
+
+.description {
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    height: 200px;
+    margin-top: 15px;
+    padding: 5px;
+    width: 600px;
+}
+
+.button {
+    text-align: center;
+}
+
+.additem {
+    background-color: #4F6DA1;
+    border: 1px solid;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 5px;
+    text-align: center;
+    width: 110px;
+}
+
+.additem:hover {
+    background-color: #5B7FBD;
+}
+

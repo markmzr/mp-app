@@ -16,7 +16,27 @@
         </div>
     </div>
     <div class="main">
-        <h1 class="header">Hello, <span sec:authentication="name"></span>!</h1>
+        <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
+            <div>
+                <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
+                <input type="submit" class="search" value="Search"/>
+            </div>
+        </form>
+        <h1 class="myaccount">My Account</h1>
+        <a th:href="@{/additem}">Add Item</a>
+        <h1 class="myitems">My Items</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+                <td><a th:href="@{'/edititem/' + ${item.id}}">Edit Item</a></td>
+                <td><a th:href="@{'/removeitem/' + ${item.id}}">Remove Item</a></td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>

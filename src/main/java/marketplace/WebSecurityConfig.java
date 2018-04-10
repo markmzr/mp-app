@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String[] strings = {"/", "/search", "/results", "/register", "/**.css"};
+        String[] strings = {"/", "/index", "/results", "/register", "/**.css"};
 
         http.authorizeRequests()
                 .antMatchers(strings).permitAll()
