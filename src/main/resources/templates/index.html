@@ -8,21 +8,18 @@
 <body>
 <div class="grid-container">
     <div class="menu">
-        <div class="navbar">
-            <span><a href="/">Home</a></span>
-            <span><a th:href="@{/myaccount}">My Account</a></span>
-            <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}">Create Account</a></span>
-            <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}">Sign Out</a></span>
-        </div>
+        <span><a href="/">Home</a></span>
+        <span><a th:href="@{/myaccount}">My Account</a></span>
+        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}">Create Account</a></span>
+        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}">Sign Out</a></span>
     </div>
     <div class="main">
-    <h1 class ="header">Marketplace</h1>
-		<form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
-			<div>
+        <div th:if="${registerSuccess}" class="registerSuccess" th:text="${registerSuccess}"></div>
+        <h1 class ="header">Marketplace</h1>
+        <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
                 <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
 				<input type="submit" class="search" value="Search"/>
-            </div>
-		</form>
+        </form>
     </div>
 </div>
 </body>

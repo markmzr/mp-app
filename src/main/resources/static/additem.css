@@ -1,5 +1,11 @@
 .menu {
     grid-area: menu;
+    padding: 10px;
+}
+
+.menu > span {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .main {
@@ -29,18 +35,10 @@ a:hover, a:active {
     text-decoration: underline;
 }
 
-.navbar {
-    padding: 10px;
-}
-
-.navbar > span {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 .header {
 	font-family: Tahoma, Geneva, sans-serif;
 	font-size: 24px;
+	margin-bottom: 30px;
 	margin-top: 60px;
 }
 
@@ -72,12 +70,19 @@ a:hover, a:active {
     background-color: #5B7FBD;
 }
 
+.error {
+    color: #CC0000;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
 .name {
     border: 1px solid;
     border-radius: 3px;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 14px;
-    margin-top: 15px;
+    margin-bottom: 15px;
     padding: 5px;
     width: 600px;
 }
@@ -88,12 +93,45 @@ a:hover, a:active {
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 14px;
     height: 200px;
-    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 5px;
+    width: 600px;
+}
+
+.email {
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-bottom: 15px;
+    padding: 5px;
+    width: 600px;
+}
+
+.phoneNumber {
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-bottom: 15px;
     padding: 5px;
     width: 600px;
 }
 
 .button {
+    text-align: center;
+}
+
+.fileLabel {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.files {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
     text-align: center;
 }
 
@@ -105,7 +143,7 @@ a:hover, a:active {
     cursor: pointer;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 5px;
     text-align: center;
     width: 110px;

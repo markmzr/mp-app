@@ -8,29 +8,47 @@
 <body>
 <div class="grid-container">
     <div class="menu">
-        <div class="navbar">
-            <span><a href="/">Home</a></span>
-            <span><a th:href="@{/myaccount}">My Account</a></span>
-            <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}">Create Account</a></span>
-            <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}">Sign Out</a></span>
-        </div>
+        <span><a href="/">Home</a></span>
+        <span><a th:href="@{/myaccount}">My Account</a></span>
+        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}">Create Account</a></span>
+        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}">Sign Out</a></span>
     </div>
     <div class="main">
         <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
-            <div>
                 <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
                 <input type="submit" class="search" value="Search"/>
-            </div>
         </form>
         <h1 class="header">Edit Item</h1>
-        <form action="#" th:action="@{'/edititem/' + ${item.id}}" th:object="${item}" method="post">
-            <div>
-                <input type="text" th:field="*{name}" class="name"/><br />
-                <textarea th:field="*{description}" class="description"></textarea>
+        <form action="#" th:action="@{'/edititem/' + ${item.id}}" th:object="${item}" enctype="multipart/form-data" method="post">
+            <div th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></div>
+            <input type="text" th:field="*{name}" class="name" placeholder="Name"/><br />
+            <div th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}"></div>
+            <textarea th:field="*{description}" class="description" placeholder="Description"></textarea><br />
+            <div th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}"></div>
+            <input type="text" th:field="*{email}" class="email" placeholder="Contact Email"><br />
+            <div th:if="${#fields.hasErrors('phoneNumber')}" class="error" th:errors="*{phoneNumber}"></div>
+            <input type="text" th:field="*{phoneNumber}" class="phoneNumber" placeholder="Contact Phone Number">
+            <div class="imagesLabel" th:text="'At least 1 image is required. ' + ${imageCount} + ' out of 3 images in use.'"></div>
+            <table>
+                <tr>
+                    <td th:each="image : ${images}">
+                        <a th:href="@{${awsUrl} + ${image.name}}" target="_blank">
+                            <img th:src="${awsUrl} + ${image.name}" class="itemImage">
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td th:each="image : ${images}">
+                        <a th:href="@{'/removeimage/' + ${image.name}}">Remove</a>
+                    </td>
+                </tr>
+            </table>
+            <div class="fileLabel">Upload Images</div>
+            <div th:switch="${imageCount}">
+                <span th:case="3" class="files">Maximum number of images in use, additional images may not be uploaded.</span>
+                <span th:case="*"><input type="file" name="files" class="files" accept="image/*" multiple></span>
             </div>
-            <div class="button">
-                <input type="submit" class="edititem" value="Edit Item"/>
-            </div>
+            <input type="submit" class="edititem" value="Edit Item"/>
         </form>
     </div>
 </div>

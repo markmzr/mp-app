@@ -1,5 +1,11 @@
 .menu {
     grid-area: menu;
+    padding: 10px;
+}
+
+.menu > span {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .main {
@@ -26,16 +32,6 @@ a:hover, a:active {
     font-size: 14px;
     text-decoration: underline;
 }
-
-.navbar {
-    padding: 10px;
-}
-
-.navbar > span {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 
 .keywords {
     border: 1px solid;
