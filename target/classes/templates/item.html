@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Marketplace Web Application</title>
-    <link rel="stylesheet" type="text/css" href="menu.css">
-	<link rel="stylesheet" type="text/css" href="index.css">
+    <title>Item</title>
+    <link rel="stylesheet" type="text/css" href="/menu.css">
+    <link rel="stylesheet" type="text/css" href="/item.css">
 </head>
 <body>
 <div class="grid-container">
@@ -20,9 +20,19 @@
             </form>
         </div>
     </div>
-    <div class="main">
-        <div th:if="${registerSuccess}" class="registerSuccess" th:text="${registerSuccess}"></div>
-        <h1 class ="header">Marketplace</h1>
+    <div class="item-header">
+        <h1 th:text="'$' + ${item.price} + ' - ' + ${item.name}" class="header"></h1>
+    </div>
+    <div class="item-images">
+        <div th:each="image : ${images}" class="image-div">
+            <a th:href="${awsUrl} + ${image.name}" target="_blank"><img th:src="${awsUrl} + ${image.name}" class="image"></a>
+        </div>
+    </div>
+    <div class="item-info">
+            <pre th:text="${item.description}"></pre><br />
+            <span class="label">Date Posted: </span><span th:text="${item.date}"></span><br /><br />
+            <span class="label">Contact Email:  </span><span th:text="${item.email}"></span><br /><br />
+            <span class="label">Contact Phone Number:  </span><span th:text="${item.phoneNumber}"></span>
     </div>
 </div>
 </body>

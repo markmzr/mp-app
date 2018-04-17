@@ -3,23 +3,26 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Marketplace Web Application</title>
+    <link rel="stylesheet" type="text/css" href="menu.css">
 	<link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
 <div class="grid-container">
     <div class="menu">
-        <span><a href="/">Home</a></span>
-        <span><a th:href="@{/myaccount}">My Account</a></span>
-        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}">Create Account</a></span>
-        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}">Sign Out</a></span>
+        <span><a href="/" class="menu-link">Home</a></span>
+        <span><a th:href="@{/myaccount}" class="menu-link">My Account</a></span>
+        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}" class="menu-link">Create Account</a></span>
+        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}" class="menu-link">Sign Out</a></span>
+        <div class="search-bar">
+            <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
+                <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
+                <input type="submit" class="search" value="Search"/>
+            </form>
+        </div>
     </div>
     <div class="main">
         <div th:if="${registerSuccess}" class="registerSuccess" th:text="${registerSuccess}"></div>
         <h1 class ="header">Marketplace</h1>
-        <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
-                <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
-				<input type="submit" class="search" value="Search"/>
-        </form>
     </div>
 </div>
 </body>

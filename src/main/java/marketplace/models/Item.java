@@ -1,7 +1,9 @@
 package marketplace.models;
 
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "item")
@@ -15,9 +17,14 @@ public class Item {
     @NotEmpty(message = "Name is required")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition="text")
     @NotEmpty(message = "Description is required")
     private String description;
+
+    @Column(name = "price")
+    @NotEmpty(message = "Price is required")
+    @Range(min = 0l, message = "Price must be a positive integer")
+    private String price;
 
     @Column(name = "email")
     @NotEmpty(message = "Contact email is required")
@@ -62,6 +69,14 @@ public class Item {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getEmail() {

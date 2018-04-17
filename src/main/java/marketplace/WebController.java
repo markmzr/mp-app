@@ -1,6 +1,7 @@
 package marketplace;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -94,23 +95,34 @@ public class WebController {
             model.addAttribute("awsUrl", System.getenv("AWS_URL"));
             return "edititem";
         }
-        if (!files[0].isEmpty()) {
+        if (!(files[0].isEmpty())) {
             int imageCount = imageService.countItemImages(itemId);
             imageCount += files.length;
 
             if (imageCount > 3) {
                 return "redirect:/edititem/" + itemId;
             }
+
+            for (MultipartFile file : files) {
+                imageService.saveImage(item, file);
+                storageService.saveFile(item, file);
+            }
         }
 
         item.setId(itemId);
         itemService.updateItem(item);
-
-        for (MultipartFile file : files) {
-            imageService.saveImage(item, file);
-            storageService.saveFile(item, file);
-        }
         return "redirect:/myaccount";
+    }
+
+    @GetMapping("/item/{itemId}")
+    public String item(@PathVariable(value="itemId") int itemId, Model model) {
+        Item item = itemService.findItem(itemId);
+        List<Image> images = imageService.findItemImages(itemId);
+        model.addAttribute("keywords", new Item());
+        model.addAttribute("item", item);
+        model.addAttribute("images", images);
+        model.addAttribute("awsUrl", System.getenv("AWS_URL"));
+        return "item";
     }
 
     @GetMapping("/myaccount")
@@ -159,13 +171,25 @@ public class WebController {
     @GetMapping("/removeitem/{itemId}")
     public String removeItem(@PathVariable(value="itemId") int itemId) {
         itemService.deleteItem(itemId);
+        storageService.deleteItemFiles(itemId);
+        imageService.deleteItemImages(itemId);
         return "redirect:/myaccount";
     }
 
     @GetMapping("/results")
     public String results(@ModelAttribute Item item, Model model) {
         List<Item> items = itemService.findItems(item);
-        model.addAttribute("items", items);
+        HashMap<String, Item> hashMap = new HashMap<String, Item>();
+
+        for (Item it : items) {
+            Image image = imageService.findFirstItemImage(it);
+            hashMap.put(image.getName(), it);
+        }
+
+        model.addAttribute("keywords", new Item());
+        model.addAttribute("resultCount", items.size());
+        model.addAttribute("items", hashMap);
+        model.addAttribute("awsUrl", System.getenv("AWS_URL"));
         return "results";
     }
 

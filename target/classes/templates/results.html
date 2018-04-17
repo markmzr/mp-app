@@ -1,21 +1,35 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Search results</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Search Results</title>
+    <link rel="stylesheet" type="text/css" href="menu.css">
     <link rel="stylesheet" type="text/css" href="results.css">
 </head>
 <body>
-    <h1 class="header">Results</h1>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
-        <tr th:each="item : ${items}">
-            <td th:text="${item.name}"></td>
-            <td th:text="${item.description}"></td>
-        </tr>
-    </table>
+<div class="grid-container">
+    <div class="menu">
+        <span><a href="/" class="menu-link">Home</a></span>
+        <span><a th:href="@{/myaccount}" class="menu-link">My Account</a></span>
+        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}" class="menu-link">Create Account</a></span>
+        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}" class="menu-link">Sign Out</a></span>
+        <div class="search-bar">
+            <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
+                <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
+                <input type="submit" class="search" value="Search"/>
+            </form>
+        </div>
+    </div>
+    <div class="main">
+        <h1 th:if="${resultCount} == '1'" th:text="${resultCount} + ' Result'" class="header"></h1>
+        <h1 th:unless="${resultCount} == '1'" th:text="${resultCount} + ' Results'" class="header"></h1>
+            <div th:each="item : ${items}" class="grid-item">
+                <a th:href="@{'/item/' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}" class="grid-image"></a>
+                <div class="item-name">
+                    <a th:href="@{'item/' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+                </div>
+            </div>
+    </div>
+</div>
 </body>
 </html>

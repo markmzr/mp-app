@@ -3,36 +3,39 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>My Account</title>
+    <link rel="stylesheet" type="text/css" href="menu.css">
     <link rel="stylesheet" type="text/css" href="myaccount.css">
 </head>
 <body>
 <div class="grid-container">
     <div class="menu">
-        <span><a href="/">Home</a></span>
-        <span><a th:href="@{/myaccount}">My Account</a></span>
-        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}">Create Account</a></span>
-        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}">Sign Out</a></span>
-    </div>
-    <div class="main">
-        <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
+        <span><a href="/" class="menu-link">Home</a></span>
+        <span><a th:href="@{/myaccount}" class="menu-link">My Account</a></span>
+        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}" class="menu-link">Create Account</a></span>
+        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}" class="menu-link">Sign Out</a></span>
+        <div class="search-bar">
+            <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
                 <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
                 <input type="submit" class="search" value="Search"/>
-        </form>
-        <h1 class="myaccount">My Account</h1>
-        <a th:href="@{/additem}">Add Item</a>
-        <h1 class="myitems">My Items</h1>
+            </form>
+        </div>
+    </div>
+    <div class="main">
+        <h1 class="my-account">My Account</h1>
+        <a th:href="@{/additem}" class="link">Add Item</a>
+        <h1 class="my-items">My Items</h1>
         <table>
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Edit Item</th>
-                <th>Remove Item</th>
+                <th class="th1">Name</th>
+                <th class="th2">Date Posted</th>
+                <th class="th2">Edit Item</th>
+                <th class="th2">Remove Item</th>
             </tr>
             <tr th:each="item : ${items}">
-                <td th:text="${item.name}"></td>
-                <td th:text="${item.description}"></td>
-                <td><a th:href="@{'/edititem/' + ${item.id}}">Edit</a></td>
-                <td><a th:href="@{'/removeitem/' + ${item.id}}">Remove</a></td>
+                <td><a th:href="@{'/item/' + ${item.id}}" th:text="${item.name}" class="name"></a></td>
+                <td th:text="${item.date}"></td>
+                <td><a th:href="@{'/edititem/' + ${item.id}}" class="link">Edit Item</a></td>
+                <td><a th:href="@{'/removeitem/' + ${item.id}}" class="link">Remove Item</a></td>
             </tr>
         </table>
     </div>

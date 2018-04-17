@@ -21,6 +21,11 @@ public class ImageService {
         return imageCount;
     }
 
+    public Image findFirstItemImage(Item item) {
+        Image image = imageRepository.findFirstByItemId(item.getId());
+        return image;
+    }
+
     public List<Image> findItemImages(int itemId) {
         List<Image> images = imageRepository.findByItemId(itemId);
         return images;
@@ -37,5 +42,10 @@ public class ImageService {
     public void deleteImage(int itemId, String imageName) {
         String name = itemId + "/" + imageName;
         imageRepository.deleteByName(name);
+    }
+
+    @Transactional
+    public void deleteItemImages(int itemId) {
+        imageRepository.deleteByItemId(itemId);
     }
 }

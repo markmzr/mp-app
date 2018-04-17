@@ -10,7 +10,7 @@ public class Image {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "itemId")
+    @Column(name = "itemid")
     private int itemId;
 
     @Column(name = "name")

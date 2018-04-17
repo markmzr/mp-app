@@ -3,35 +3,40 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Add Item</title>
+    <link rel="stylesheet" type="text/css" href="menu.css">
     <link rel="stylesheet" type="text/css" href="additem.css">
 </head>
 <body>
 <div class="grid-container">
     <div class="menu">
-        <span><a href="/">Home</a></span>
-        <span><a th:href="@{/myaccount}">My Account</a></span>
-        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}">Create Account</a></span>
-        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}">Sign Out</a></span>
+        <span><a href="/" class="menu-link">Home</a></span>
+        <span><a th:href="@{/myaccount}" class="menu-link">My Account</a></span>
+        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}" class="menu-link">Create Account</a></span>
+        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}" class="menu-link">Sign Out</a></span>
+        <div class="search-bar">
+            <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
+                <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
+                <input type="submit" class="search" value="Search"/>
+            </form>
+        </div>
     </div>
     <div class="main">
-        <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
-            <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
-            <input type="submit" class="search" value="Search"/>
-        </form>
         <h1 class="header">Add Item</h1>
         <form action="#" th:action="@{/additem}" th:object="${item}" enctype="multipart/form-data" method="post">
             <div th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></div>
             <input type="text" th:field="*{name}" class="name" placeholder="Name"/><br />
             <div th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}"></div>
             <textarea th:field="*{description}" class="description" placeholder="Description"></textarea><br />
+            <div th:if="${#fields.hasErrors('price')}" class="error" th:errors="*{price}"></div>
+            <input type="text" th:field="*{price}" class="price" placeholder="0"><br />
             <div th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}"></div>
             <input type="text" th:field="*{email}" class="email" placeholder="Contact Email"><br />
             <div th:if="${#fields.hasErrors('phoneNumber')}" class="error" th:errors="*{phoneNumber}"></div>
-            <input type="text" th:field="*{phoneNumber}" class="phoneNumber" placeholder="Contact Phone Number"><br />
+            <input type="text" th:field="*{phoneNumber}" class="phone-number" placeholder="Contact Phone Number"><br />
             <div th:if="${fileError}" class="error" th:text="${fileError}"></div>
-            <div class="fileLabel">Upload Images</div>
+            <div class="file-label">Upload Images</div>
             <input type="file" name="files" class="files" accept="image/*" multiple><br />
-            <input type="submit" class="additem" value="Add Item"/>
+            <input type="submit" class="add-item" value="Add Item"/>
         </form>
     </div>
 </div>
