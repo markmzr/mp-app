@@ -16,6 +16,8 @@
         <div class="search-bar">
             <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
                 <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
+                <input type="hidden" name="condition" value="all">
+                <input type="hidden" name="sort" value="relevance">
                 <input type="submit" class="search" value="Search"/>
             </form>
         </div>
@@ -23,6 +25,25 @@
     <div class="main">
         <h1 class="header">Add Item</h1>
         <form action="#" th:action="@{/additem}" th:object="${item}" enctype="multipart/form-data" method="post">
+            <div class="category">
+                <div class="menu-label">Category:</div>
+                <span>
+                    <select th:field="*{category}" class="dropdown">
+                        <option value="appliance">Appliance</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="furniture">Furniture</option>
+                    </select>
+                </span>
+            </div><br /><br />
+            <div class="condition">
+                <div class="menu-label">Condition:</div>
+                <span>
+                    <select th:field="*{itemCondition}" class="dropdown">
+                        <option value="new">New</option>
+                        <option value="used">Used</option>
+                    </select>
+                </span>
+            </div><br />
             <div th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></div>
             <input type="text" th:field="*{name}" class="name" placeholder="Name"/><br />
             <div th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}"></div>

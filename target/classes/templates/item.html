@@ -16,6 +16,8 @@
         <div class="search-bar">
             <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
                 <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
+                <input type="hidden" name="condition" value="all">
+                <input type="hidden" name="sort" value="relevance">
                 <input type="submit" class="search" value="Search"/>
             </form>
         </div>
@@ -29,7 +31,7 @@
         </div>
     </div>
     <div class="item-info">
-            <pre th:text="${item.description}"></pre><br />
+            <pre th:text="${item.description}"></pre>
             <span class="label">Date Posted: </span><span th:text="${item.date}"></span><br /><br />
             <span class="label">Contact Email:  </span><span th:text="${item.email}"></span><br /><br />
             <span class="label">Contact Phone Number:  </span><span th:text="${item.phoneNumber}"></span>

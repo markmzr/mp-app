@@ -12,6 +12,8 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
     void deleteById(int id);
     Item findById(int id);
     List<Item> findByNameContaining(String name);
+    List<Item> findByNameContainingOrderByPriceAsc(String name);
+    List<Item> findByNameContainingOrderByPriceDesc(String name);
     List<Item> findByUsername(String username);
     Item save(Item item);
 }

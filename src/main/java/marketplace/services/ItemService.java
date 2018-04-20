@@ -26,6 +26,16 @@ public class ItemService {
         return items;
     }
 
+    public List<Item> findItemsSortByPriceAsc(Item item) {
+        List<Item> items = itemRepository.findByNameContainingOrderByPriceAsc(item.getName());
+        return items;
+    }
+
+    public List<Item> findItemsSortByPriceDesc(Item item) {
+        List<Item> items = itemRepository.findByNameContainingOrderByPriceDesc(item.getName());
+        return items;
+    }
+
     public List<Item> findUserItems() {
         String username = getUsername();
         List<Item> items = itemRepository.findByUsername(username);

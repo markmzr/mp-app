@@ -24,6 +24,38 @@
     margin-bottom: 5px;
 }
 
+.category {
+    float: left;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.condition {
+    float: left;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    margin-top: 8px;
+}
+
+.menu-label {
+    float: left;
+    padding-top: 2.4%;
+    text-align: left;
+    width: 80px;
+}
+
+.dropdown {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-left: 10px;
+    padding: 3px;
+    position: relative;
+    transformY: (-50%);
+}
+
 .name {
     border: 1px solid;
     border-radius: 3px;

@@ -16,13 +16,40 @@
         <div class="search-bar">
             <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
                 <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
+                <input type="hidden" name="condition" value="all">
+                <input type="hidden" name="sort" value="relevance">
                 <input type="submit" class="search" value="Search"/>
             </form>
         </div>
     </div>
+    <div class="side-menu">
+        <div class="condition">
+            <div class="condition-label">Condition</div>
+            <form>
+                <div class="checkbox">
+                    <span><input type="checkbox" id="new" value="New" onclick="updateCondition()"></span>
+                    <span class="checkbox-label">New</span>
+                </div>
+                <div class="checkbox">
+                    <span><input type="checkbox" id="used" value="Used" onclick="updateCondition()"></span>
+                    <span class="checkbox-label">Used</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="header">
+        <div></div>
+        <div th:if="${resultCount} == '1'" th:text="${resultCount} + ' Result'" class="results"></div>
+        <div th:unless="${resultCount} == '1'" th:text="${resultCount} + ' Results'" class="results"></div>
+        <div class="sort">Sort by
+            <select id="sort" class="sort" onchange="updateSort(value)">
+                <option value="relevance">Relevance</option>
+                <option value="priceasc">Price: Low to High</option>
+                <option value="pricedesc">Price: High to Low</option>
+            </select>
+        </div>
+    </div>
     <div class="main">
-        <h1 th:if="${resultCount} == '1'" th:text="${resultCount} + ' Result'" class="header"></h1>
-        <h1 th:unless="${resultCount} == '1'" th:text="${resultCount} + ' Results'" class="header"></h1>
             <div th:each="item : ${items}" class="grid-item">
                 <a th:href="@{'/item/' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}" class="grid-image"></a>
                 <div class="item-name">
@@ -31,5 +58,78 @@
             </div>
     </div>
 </div>
+<script>
+    setCondition();
+    setSort();
+
+    function setCondition() {
+        var url = new URL(window.location.href);
+        var parameters = new URLSearchParams(url.search);
+        var condition = parameters.get("condition");
+
+        if (condition == "all") {
+            document.getElementById("new").checked = false;
+            document.getElementById("used").checked = false;
+        }
+        else if (condition == "any") {
+            document.getElementById("new").checked = true;
+            document.getElementById("used").checked = true;
+        }
+        else if (condition == "new") {
+            document.getElementById("new").checked = true;
+        }
+        else if (condition == "used") {
+            document.getElementById("used").checked = true;
+        }
+    }
+
+    function setSort() {
+        var url = new URL(window.location.href);
+        var parameters = new URLSearchParams(url.search);
+        var sort = parameters.get("sort");
+
+        if (sort == "relevance") {
+            document.getElementById("sort").selectedIndex = 0;
+        }
+        else if (sort == "priceasc") {
+            document.getElementById("sort").selectedIndex = 1;
+        }
+        else if (sort == "pricedesc") {
+            document.getElementById("sort").selectedIndex = 2;
+        }
+    }
+
+    function updateCondition() {
+        var url = new URL(window.location.href);
+        var params = new URLSearchParams(url.search);
+        var newChecked = document.getElementById("new").checked;
+        var usedChecked = document.getElementById("used").checked;
+
+        if (newChecked && usedChecked) {
+            params.set('condition', 'any');
+        }
+        else if (!newChecked && !usedChecked) {
+            params.set("condition", "all");
+        }
+        else if (newChecked) {
+            params.set('condition', 'new');
+        }
+        else if (usedChecked) {
+            params.set('condition', 'used');
+        }
+
+        window.history.replaceState({}, '', '/results?' + params);
+        window.location.assign(window.location.href);
+    }
+
+    function updateSort(value) {
+        var url = new URL(window.location.href);
+        var params = new URLSearchParams(url.search);
+        params.set("sort", value);
+
+        window.history.replaceState({}, '', '/results?' + params);
+        window.location.assign(window.location.href);
+    }
+</script>
 </body>
 </html>

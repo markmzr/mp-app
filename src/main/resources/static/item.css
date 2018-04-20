@@ -22,11 +22,13 @@
     margin-right: auto;
     margin-top: 1px;
     max-width: 980px;
+    width: 980px;
 }
 
 .item-info pre {
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 14px;
+    margin-bottom: 17px;
     overflow-wrap: break-word;
     white-space: pre-wrap;
 }

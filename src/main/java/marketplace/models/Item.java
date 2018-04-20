@@ -34,11 +34,17 @@ public class Item {
     @NotEmpty(message = "Contact phone number is required")
     private String phoneNumber;
 
-    @Column(name = "date")
+    @Column(name = "date", length = 20)
     private String date;
 
-    @Column(name = "username")
+    @Column(name = "username", length = 30)
     private String username;
+
+    @Column(name = "itemcondition", length = 10)
+    private String itemCondition;
+
+    @Column(name = "category")
+    private String category;
 
     public Item() { }
 
@@ -77,6 +83,23 @@ public class Item {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+
+    public String getItemCondition() {
+        return itemCondition;
+    }
+
+    public void setItemCondition(String itemCondition) {
+        this.itemCondition = itemCondition;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getEmail() {

@@ -1,8 +1,7 @@
 package marketplace;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import javax.validation.Valid;
 
 import marketplace.models.Image;
@@ -84,7 +83,7 @@ public class WebController {
 
     @PostMapping("/edititem/{itemId}")
     public String editItemPost(@Valid Item item, BindingResult bindingResult, @PathVariable(value="itemId") int itemId,
-                               @RequestParam("files") MultipartFile[] files, Model model) throws IOException {
+                               @RequestParam("files") MultipartFile[] files, Model model) throws Exception {
         if (bindingResult.hasErrors()) {
             List<Image> images = imageService.findItemImages(itemId);
             int imageCount = images.size();
@@ -95,7 +94,7 @@ public class WebController {
             model.addAttribute("awsUrl", System.getenv("AWS_URL"));
             return "edititem";
         }
-        if (!(files[0].isEmpty())) {
+        if (files.length > 0 && !files[0].isEmpty()) {
             int imageCount = imageService.countItemImages(itemId);
             imageCount += files.length;
 
@@ -177,18 +176,41 @@ public class WebController {
     }
 
     @GetMapping("/results")
-    public String results(@ModelAttribute Item item, Model model) {
-        List<Item> items = itemService.findItems(item);
-        HashMap<String, Item> hashMap = new HashMap<String, Item>();
+    public String results(@ModelAttribute Item item, @RequestParam(value="condition") String condition,
+                          @RequestParam(value="sort") String sortBy, Model model) {
+        List<Item> items = new ArrayList<Item>();
+        switch(sortBy) {
+            case "relevance" :
+                items = itemService.findItems(item);
+                break;
+            case "priceasc" :
+                items = itemService.findItemsSortByPriceAsc(item);
+                break;
+            case "pricedesc" :
+                items = itemService.findItemsSortByPriceDesc(item);
+                break;
+        }
 
+        if (condition.equals("new") || condition.equals("used")) {
+            Iterator<Item> iterator = items.iterator();
+            while (iterator.hasNext()) {
+                Item it = iterator.next();
+
+                if (!it.getItemCondition().equals(condition)) {
+                    iterator.remove();
+                }
+            }
+        }
+
+        LinkedHashMap<String, Item> map = new LinkedHashMap<String, Item>();
         for (Item it : items) {
             Image image = imageService.findFirstItemImage(it);
-            hashMap.put(image.getName(), it);
+            map.put(image.getName(), it);
         }
 
         model.addAttribute("keywords", new Item());
         model.addAttribute("resultCount", items.size());
-        model.addAttribute("items", hashMap);
+        model.addAttribute("items", map);
         model.addAttribute("awsUrl", System.getenv("AWS_URL"));
         return "results";
     }

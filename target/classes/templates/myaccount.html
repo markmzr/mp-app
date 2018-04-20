@@ -16,6 +16,8 @@
         <div class="search-bar">
             <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
                 <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
+                <input type="hidden" name="condition" value="all">
+                <input type="hidden" name="sort" value="relevance">
                 <input type="submit" class="search" value="Search"/>
             </form>
         </div>
