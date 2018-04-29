@@ -17,7 +17,7 @@
         'menu menu'
         'header header'
         'side-menu main';
-    grid-template-columns: 200px auto;
+    grid-template-columns: 220px auto;
 }
 
 .header {
@@ -30,11 +30,17 @@
     margin-top: 60px;
 }
 
-.results {
+.resultDiv {
+    margin-top: 6px;
+    text-align: center;
+}
+
+.resultCount, .result {
 	font-family: Tahoma, Geneva, sans-serif;
 	font-size: 14px;
 	font-weight: bold;
-	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .sort {
@@ -65,6 +71,55 @@
 .checkbox-label {
     position: relative;
     bottom: 2px;
+}
+
+.distance {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.distance-label {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.miles {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-left: 4px;
+    margin-right: 3px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    width: 40px;
+}
+
+.zip-code {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-left: 8px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    width: 60px;
+}
+
+.distance-submit {
+    display: block;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 9px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
 }
 
 .grid-item {
@@ -106,4 +161,8 @@
 
 .item-name a:hover, .item-name a:active {
     text-decoration: underline;
+}
+
+.item-latitude, .item-longitude {
+    display: none;
 }

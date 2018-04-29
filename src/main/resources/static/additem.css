@@ -89,6 +89,16 @@
     width: 600px;
 }
 
+.zipCode {
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-bottom: 15px;
+    padding: 5px;
+    width: 600px;
+}
+
 .email {
     border: 1px solid;
     border-radius: 3px;

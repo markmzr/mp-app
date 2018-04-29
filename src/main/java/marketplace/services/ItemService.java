@@ -56,6 +56,10 @@ public class ItemService {
         Item item = itemRepository.findById(updatedItem.getId());
         item.setName(updatedItem.getName());
         item.setDescription(updatedItem.getDescription());
+        item.setPrice(updatedItem.getPrice());
+        item.setZipCode(updatedItem.getZipCode());
+        item.setEmail(updatedItem.getEmail());
+        item.setPhoneNumber(updatedItem.getPhoneNumber());
         itemRepository.save(item);
     }
 

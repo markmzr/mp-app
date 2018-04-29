@@ -26,9 +26,14 @@
         <h1 th:text="'$' + ${item.price} + ' - ' + ${item.name}" class="header"></h1>
     </div>
     <div class="item-images">
-        <div th:each="image : ${images}" class="image-div">
+        <span th:each="image : ${images}" class="image-div">
             <a th:href="${awsUrl} + ${image.name}" target="_blank"><img th:src="${awsUrl} + ${image.name}" class="image"></a>
-        </div>
+        </span>
+        <span class="map">
+            <iframe width="300" height="300" frameborder="0" style="border:0"
+                    th:src="'https://www.google.com/maps/embed/v1/place?q=' + ${item.zipCode} + '&zoom=11&key=' + ${apiKey}" allowfullscreen>
+            </iframe>
+        </span>
     </div>
     <div class="item-info">
             <pre th:text="${item.description}"></pre>

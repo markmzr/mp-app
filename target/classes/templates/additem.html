@@ -5,6 +5,7 @@
     <title>Add Item</title>
     <link rel="stylesheet" type="text/css" href="menu.css">
     <link rel="stylesheet" type="text/css" href="additem.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="grid-container">
@@ -24,7 +25,8 @@
     </div>
     <div class="main">
         <h1 class="header">Add Item</h1>
-        <form action="#" th:action="@{/additem}" th:object="${item}" enctype="multipart/form-data" method="post">
+        <form action="#" th:action="@{/additem}" th:object="${item}" id="addItemForm"
+              enctype="multipart/form-data" method="post">
             <div class="category">
                 <div class="menu-label">Category:</div>
                 <span>
@@ -43,13 +45,15 @@
                         <option value="used">Used</option>
                     </select>
                 </span>
-            </div><br />
+            </div><br /><br /><br />
             <div th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></div>
             <input type="text" th:field="*{name}" class="name" placeholder="Name"/><br />
             <div th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}"></div>
             <textarea th:field="*{description}" class="description" placeholder="Description"></textarea><br />
             <div th:if="${#fields.hasErrors('price')}" class="error" th:errors="*{price}"></div>
             <input type="text" th:field="*{price}" class="price" placeholder="0"><br />
+            <div th:if="${#fields.hasErrors('zipCode')}" class="error" th:errors="*{zipCode}"></div>
+            <input type="text" th:field="*{zipCode}" class="zipCode" id="zipCode" placeholder="Zip Code"/><br />
             <div th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}"></div>
             <input type="text" th:field="*{email}" class="email" placeholder="Contact Email"><br />
             <div th:if="${#fields.hasErrors('phoneNumber')}" class="error" th:errors="*{phoneNumber}"></div>
@@ -61,5 +65,6 @@
         </form>
     </div>
 </div>
+<script type="text/javascript" th:inline="javascript" th:src="additem.js"></script>
 </body>
 </html>

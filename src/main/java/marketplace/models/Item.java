@@ -46,6 +46,16 @@ public class Item {
     @Column(name = "category")
     private String category;
 
+    @Column(name = "zipcode")
+    @Range(min = 0l, max = 99999, message = "A valid zip code is required")
+    private String zipCode;
+
+    @Column(name = "latitude")
+    private String latitude;
+
+    @Column(name = "longitude")
+    private String longitude;
+
     public Item() { }
 
     public Item(String name, String description) {
@@ -100,6 +110,30 @@ public class Item {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public String getEmail() {

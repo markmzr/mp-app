@@ -34,10 +34,10 @@
                 <th class="th2">Remove Item</th>
             </tr>
             <tr th:each="item : ${items}">
-                <td><a th:href="@{'/item/' + ${item.id}}" th:text="${item.name}" class="name"></a></td>
+                <td><a th:href="@{'/item?id=' + ${item.id}}" th:text="${item.name}" class="name"></a></td>
                 <td th:text="${item.date}"></td>
-                <td><a th:href="@{'/edititem/' + ${item.id}}" class="link">Edit Item</a></td>
-                <td><a th:href="@{'/removeitem/' + ${item.id}}" class="link">Remove Item</a></td>
+                <td><a th:href="@{'/edititem?id=' + ${item.id}}" class="link">Edit Item</a></td>
+                <td><a th:href="@{'/removeitem?id=' + ${item.id}}" class="link">Remove Item</a></td>
             </tr>
         </table>
     </div>

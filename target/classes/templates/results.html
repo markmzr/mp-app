@@ -5,6 +5,8 @@
     <title>Search Results</title>
     <link rel="stylesheet" type="text/css" href="menu.css">
     <link rel="stylesheet" type="text/css" href="results.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOLZjanrFdnJbMRmDKr1ciQqRPRMfJg_Y&libraries=geometry"></script>
 </head>
 <body>
 <div class="grid-container">
@@ -36,11 +38,25 @@
                 </div>
             </form>
         </div>
+        <div class="distance">
+            <div class="distance-label">Distance</div>
+            <form action="#" id="distanceForm">
+                <span><input type="text" name="miles" id="miles" class="miles" placeholder="Miles"></span>
+                from<span><input type="text" name="zipCode" id="zipCode" class="zip-code" placeholder="Zip Code"></span>
+                <input type="submit" class="distance-submit" value="Update Results">
+            </form>
+        </div>
     </div>
     <div class="header">
         <div></div>
-        <div th:if="${resultCount} == '1'" th:text="${resultCount} + ' Result'" class="results"></div>
-        <div th:unless="${resultCount} == '1'" th:text="${resultCount} + ' Results'" class="results"></div>
+        <div class="resultDiv">
+            <div th:if="${resultCount} == '1'">
+                <span th:text="${resultCount}" class="resultCount"></span><span class="result"> Result</span>
+            </div>
+            <div th:unless="${resultCount} == '1'">
+                <span th:text="${resultCount}" class="resultCount"></span><span class="result"> Results</span>
+            </div>
+        </div>
         <div class="sort">Sort by
             <select id="sort" class="sort" onchange="updateSort(value)">
                 <option value="relevance">Relevance</option>
@@ -51,85 +67,15 @@
     </div>
     <div class="main">
             <div th:each="item : ${items}" class="grid-item">
-                <a th:href="@{'/item/' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}" class="grid-image"></a>
+                <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}" class="grid-image"></a>
                 <div class="item-name">
-                    <a th:href="@{'item/' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+                    <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
                 </div>
+                <span class="item-latitude" th:text="${item.value.latitude}"></span>
+                <span class="item-longitude" th:text="${item.value.longitude}"></span>
             </div>
     </div>
 </div>
-<script>
-    setCondition();
-    setSort();
-
-    function setCondition() {
-        var url = new URL(window.location.href);
-        var parameters = new URLSearchParams(url.search);
-        var condition = parameters.get("condition");
-
-        if (condition == "all") {
-            document.getElementById("new").checked = false;
-            document.getElementById("used").checked = false;
-        }
-        else if (condition == "any") {
-            document.getElementById("new").checked = true;
-            document.getElementById("used").checked = true;
-        }
-        else if (condition == "new") {
-            document.getElementById("new").checked = true;
-        }
-        else if (condition == "used") {
-            document.getElementById("used").checked = true;
-        }
-    }
-
-    function setSort() {
-        var url = new URL(window.location.href);
-        var parameters = new URLSearchParams(url.search);
-        var sort = parameters.get("sort");
-
-        if (sort == "relevance") {
-            document.getElementById("sort").selectedIndex = 0;
-        }
-        else if (sort == "priceasc") {
-            document.getElementById("sort").selectedIndex = 1;
-        }
-        else if (sort == "pricedesc") {
-            document.getElementById("sort").selectedIndex = 2;
-        }
-    }
-
-    function updateCondition() {
-        var url = new URL(window.location.href);
-        var params = new URLSearchParams(url.search);
-        var newChecked = document.getElementById("new").checked;
-        var usedChecked = document.getElementById("used").checked;
-
-        if (newChecked && usedChecked) {
-            params.set('condition', 'any');
-        }
-        else if (!newChecked && !usedChecked) {
-            params.set("condition", "all");
-        }
-        else if (newChecked) {
-            params.set('condition', 'new');
-        }
-        else if (usedChecked) {
-            params.set('condition', 'used');
-        }
-
-        window.history.replaceState({}, '', '/results?' + params);
-        window.location.assign(window.location.href);
-    }
-
-    function updateSort(value) {
-        var url = new URL(window.location.href);
-        var params = new URLSearchParams(url.search);
-        params.set("sort", value);
-
-        window.history.replaceState({}, '', '/results?' + params);
-        window.location.assign(window.location.href);
-    }
-</script>
+<script src="results.js"></script>
 </body>
 </html>
