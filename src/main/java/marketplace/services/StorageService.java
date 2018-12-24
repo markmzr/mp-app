@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service("StorageService")
 public class StorageService {
+
     @Autowired
     private ImageRepository imageRepository;
 
@@ -31,6 +32,7 @@ public class StorageService {
         String filename = item.getId() + "/" + multipartFile.getOriginalFilename();
         File file = new File(multipartFile.getOriginalFilename());
         file.createNewFile();
+
         FileOutputStream stream = new FileOutputStream(file);
         stream.write(multipartFile.getBytes());
         stream.close();

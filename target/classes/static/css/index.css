@@ -1,0 +1,116 @@
+.grid {
+    display: grid;
+    grid-template-areas:
+        'menu'
+        'appliances'
+        'books'
+        'electronics'
+        'furniture'
+        'tools'
+        'vehicles';
+}
+
+.registerSuccess {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.header {
+    color: black;
+    display: block;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 24px;
+	font-weight: normal;
+	margin-bottom: 6px;
+	margin-left: 10px;
+	text-decoration: none;
+}
+
+.header:hover {
+    text-decoration: underline;
+}
+
+.appliances, .books, .electronics, .furniture, .tools {
+    border-bottom: 1px solid #b7b7b7;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+}
+
+.appliances {
+    grid-area: appliances;
+}
+
+.books {
+    grid-area: books;
+}
+
+.electronics {
+    grid-area: electronics;
+}
+
+.furniture {
+    grid-area: furniture;
+}
+
+.tools {
+    grid-area: tools;
+}
+
+.vehicles {
+    grid-area: vehicles;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+}
+
+.item {
+    border: 1px solid black;
+    border-radius: 6px;
+    display: inline-grid;
+    float: left;
+    height: 200px;
+    margin: 10px;
+    position: relative;
+    width: 200px;
+}
+
+.item:hover {
+    box-shadow: 0 0 3px black;
+}
+
+.item img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 70%;
+    max-width: 100%;
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+.item-name {
+    bottom: 0;
+    color: black;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    height: 20%;
+    margin: 5px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.item-name a {
+    color: #3399ff;
+    text-decoration: none;
+}
+
+.item-name a:hover, .item-name a:active {
+    text-decoration: underline;
+}

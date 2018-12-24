@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service("imageService")
 public class ImageService {
+
     @Autowired
     private ImageRepository imageRepository;
 
@@ -21,12 +22,12 @@ public class ImageService {
         return imageCount;
     }
 
-    public Image findFirstItemImage(Item item) {
+    public Image getFirstItemImage(Item item) {
         Image image = imageRepository.findFirstByItemId(item.getId());
         return image;
     }
 
-    public List<Image> findItemImages(int itemId) {
+    public List<Image> getItemImages(int itemId) {
         List<Image> images = imageRepository.findByItemId(itemId);
         return images;
     }

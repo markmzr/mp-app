@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Register</title>
-    <link rel="stylesheet" type="text/css" href="register.css">
+    <link rel="stylesheet" type="text/css" href="css/register.css">
 </head>
 <body>
-<div class="form">
+<div class="main">
     <h1 class="header">Create Account</h1>
-    <form action="#" th:action="@{/register}" th:object="${user}" method="post">
-        <div th:if="${#fields.hasErrors('username')}" class="error" th:errors="*{username}"></div>
-        <div th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}"></div>
-        <input type="text" th:field="*{username}" class="username" name="username" placeholder="Username"/><br />
-        <input type="password" th:field="*{password}" class="password" name="password" placeholder="Password"/><br />
-        <input type="submit" class="register" value="Create Account"/>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div class="error" th:errors="*{username}"></div>
+        <div class="label">Username</div>
+        <input type="text" th:field="*{username}" name="username" class="username"/><br />
+        <div class="error" th:errors="*{password}"></div>
+        <div class="label">Password</div>
+        <input type="password" th:field="*{password}" name="password" class="password"/><br />
+        <input type="submit" class="create-account" value="Create Account"/>
     </form>
 </div>
 </body>

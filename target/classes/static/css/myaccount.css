@@ -1,0 +1,89 @@
+.main {
+    grid-area: main;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-areas:
+        'menu'
+        'main';
+}
+
+.my-account {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 24px;
+	margin-bottom: 30px;
+}
+
+.add-item {
+    margin-left: 10px;
+}
+
+.link {
+    color: black;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.link:active, .link:hover {
+    text-decoration: underline;
+}
+
+.my-items {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 24px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-left: 10px;
+    width: 900px;
+}
+
+.th1 {
+    background-color: #2f3447;
+    color: white;
+    padding-bottom: 12px;
+    padding-left: 10px;
+    padding-top: 12px;
+    width: 58%;
+}
+
+.th2 {
+    background-color: #2f3447;
+    color: white;
+    padding-bottom: 12px;
+    padding-left: 10px;
+    padding-top: 12px;
+    width: 14%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 8px;
+    text-align: left;
+}
+
+tr:hover {
+    background-color: #e2e2e2;
+}
+
+.name {
+    color: #488bce;
+    text-decoration: none;
+}
+
+.name:active, .name:hover {
+    text-decoration: underline;
+}

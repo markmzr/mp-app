@@ -3,28 +3,35 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>My Account</title>
-    <link rel="stylesheet" type="text/css" href="menu.css">
-    <link rel="stylesheet" type="text/css" href="myaccount.css">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="css/myaccount.css">
 </head>
 <body>
-<div class="grid-container">
+<div class="grid">
     <div class="menu">
         <span><a href="/" class="menu-link">Home</a></span>
-        <span><a th:href="@{/myaccount}" class="menu-link">My Account</a></span>
-        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}" class="menu-link">Create Account</a></span>
-        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}" class="menu-link">Sign Out</a></span>
+        <span><a href="/myaccount" class="menu-link">My Account</a></span>
+        <span sec:authorize="not hasAuthority('User')"><a href="/register" class="menu-link">Create Account</a></span>
+        <span sec:authorize="hasAuthority('User')"><a href="/signout" class="menu-link">Sign Out</a></span>
         <div class="search-bar">
-            <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
-                <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
-                <input type="hidden" name="condition" value="all">
-                <input type="hidden" name="sort" value="relevance">
+            <form action="/results" method="get">
+                <input type="text" name="keywords" class="keywords"/>
+                <select name="category" class="category">
+                    <option value="all">All Categories</option>
+                    <option value="appliances">Appliances</option>
+                    <option value="books">Books</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="tools">Tools</option>
+                    <option value="vehicles">Vehicles</option>
+                </select>
                 <input type="submit" class="search" value="Search"/>
             </form>
         </div>
     </div>
     <div class="main">
         <h1 class="my-account">My Account</h1>
-        <a th:href="@{/additem}" class="link">Add Item</a>
+        <div class="add-item"><a href="/additem" class="link">Add Item</a></div>
         <h1 class="my-items">My Items</h1>
         <table>
             <tr>

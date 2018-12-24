@@ -1,20 +1,21 @@
 package marketplace.models;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "user")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
 
     @Column(name = "username")
-    @NotEmpty(message = "A username is required")
+    @NotEmpty(message = "Username is required")
     private String username;
 
     @Column(name = "password")

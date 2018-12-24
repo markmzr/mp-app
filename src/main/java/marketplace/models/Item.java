@@ -1,13 +1,14 @@
 package marketplace.models;
 
-import org.hibernate.validator.constraints.Range;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name = "item")
 public class Item {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -26,6 +27,16 @@ public class Item {
     @Range(min = 0l, message = "Price must be a positive integer")
     private String price;
 
+    @Column(name = "category")
+    private String category;
+
+    @Column(name = "itemcondition")
+    private String itemCondition;
+
+    @Column(name = "zipcode")
+    @Range(min = 0l, max = 99999, message = "A valid zip code is required")
+    private String zipCode;
+
     @Column(name = "email")
     @NotEmpty(message = "Contact email is required")
     private String email;
@@ -34,21 +45,11 @@ public class Item {
     @NotEmpty(message = "Contact phone number is required")
     private String phoneNumber;
 
-    @Column(name = "date", length = 20)
-    private String date;
-
-    @Column(name = "username", length = 30)
+    @Column(name = "username")
     private String username;
 
-    @Column(name = "itemcondition", length = 10)
-    private String itemCondition;
-
-    @Column(name = "category")
-    private String category;
-
-    @Column(name = "zipcode")
-    @Range(min = 0l, max = 99999, message = "A valid zip code is required")
-    private String zipCode;
+    @Column(name = "date", length = 30)
+    private String date;
 
     @Column(name = "latitude")
     private String latitude;
@@ -95,6 +96,13 @@ public class Item {
         this.price = price;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getItemCondition() {
         return itemCondition;
@@ -104,36 +112,12 @@ public class Item {
         this.itemCondition = itemCondition;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getZipCode() {
         return zipCode;
     }
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
     }
 
     public String getEmail() {
@@ -152,6 +136,14 @@ public class Item {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getDate() {
         return date;
     }
@@ -160,11 +152,19 @@ public class Item {
         this.date = date;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

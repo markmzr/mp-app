@@ -3,28 +3,86 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Marketplace Web Application</title>
-    <link rel="stylesheet" type="text/css" href="menu.css">
-	<link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
-<div class="grid-container">
+<div class="grid">
     <div class="menu">
         <span><a href="/" class="menu-link">Home</a></span>
-        <span><a th:href="@{/myaccount}" class="menu-link">My Account</a></span>
-        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}" class="menu-link">Create Account</a></span>
-        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}" class="menu-link">Sign Out</a></span>
+        <span><a href="/myaccount" class="menu-link">My Account</a></span>
+        <span sec:authorize="not hasAuthority('User')"><a href="/register" class="menu-link">Create Account</a></span>
+        <span sec:authorize="hasAuthority('User')"><a href="/signout" class="menu-link">Sign Out</a></span>
         <div class="search-bar">
-            <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
-                <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
-                <input type="hidden" name="condition" value="all">
-                <input type="hidden" name="sort" value="relevance">
+            <form action="/results" method="get">
+                <input type="text" name="keywords" class="keywords" />
+                <select name="category" class="category">
+                    <option value="all">All Categories</option>
+                    <option value="appliances">Appliances</option>
+                    <option value="books">Books</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="tools">Tools</option>
+                    <option value="vehicles">Vehicles</option>
+                </select>
                 <input type="submit" class="search" value="Search"/>
             </form>
         </div>
     </div>
-    <div class="main">
+    <div class="appliances">
         <div th:if="${registerSuccess}" class="registerSuccess" th:text="${registerSuccess}"></div>
-        <h1 class ="header">Marketplace</h1>
+        <a href="/results?category=appliances" class="header">Appliances</a>
+        <div th:each="item : ${appliances}" class="item">
+            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+            <div class="item-name">
+                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="books">
+        <a href="/results?category=books" class="header">Books</a>
+        <div th:each="item : ${books}" class="item">
+            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+            <div class="item-name">
+                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="electronics">
+        <a href="/results?category=electronics" class="header">Electronics</a>
+        <div th:each="item : ${electronics}" class="item">
+            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+            <div class="item-name">
+                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="furniture">
+        <a href="/results?category=furniture" class="header">Furniture</a>
+        <div th:each="item : ${furniture}" class="item">
+            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+            <div class="item-name">
+                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="tools">
+        <a href="/results?category=tools" class="header">Tools</a>
+        <div th:each="item : ${tools}" class="item">
+            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+            <div class="item-name">
+                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="vehicles">
+        <a href="/results?category=vehicles" class="header">Vehicles</a>
+        <div th:each="item : ${vehicles}" class="item">
+            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+            <div class="item-name">
+                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+            </div>
+        </div>
     </div>
 </div>
 </body>

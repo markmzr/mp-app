@@ -14,6 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private DataSource dataSource;
 
@@ -31,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String[] strings = {"/", "/index", "/item/**", "/results", "/register", "/**.css", "/**.js"};
+        String[] strings = {"/", "/index", "/item/**", "/results", "/register", "/css/**.css", "/js/**.js"};
 
         http.authorizeRequests()
                 .antMatchers(strings).permitAll()

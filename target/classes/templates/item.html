@@ -2,45 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Item</title>
-    <link rel="stylesheet" type="text/css" href="/menu.css">
-    <link rel="stylesheet" type="text/css" href="/item.css">
+    <title th:text="${item.name}"></title>
+    <link rel="stylesheet" type="text/css" href="/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="/css/item.css">
 </head>
 <body>
 <div class="grid-container">
     <div class="menu">
         <span><a href="/" class="menu-link">Home</a></span>
-        <span><a th:href="@{/myaccount}" class="menu-link">My Account</a></span>
-        <span sec:authorize="not hasAuthority('User')"><a th:href="@{/register}" class="menu-link">Create Account</a></span>
-        <span sec:authorize="hasAuthority('User')"><a th:href="@{/signout}" class="menu-link">Sign Out</a></span>
+        <span><a href="/myaccount" class="menu-link">My Account</a></span>
+        <span sec:authorize="not hasAuthority('User')"><a href="/register" class="menu-link">Create Account</a></span>
+        <span sec:authorize="hasAuthority('User')"><a href="/signout" class="menu-link">Sign Out</a></span>
         <div class="search-bar">
-            <form action="#" th:action="@{/results}" th:object="${keywords}" method="get">
-                <input type="text" th:field="*{name}" class="keywords" placeholder="Keywords"/>
-                <input type="hidden" name="condition" value="all">
-                <input type="hidden" name="sort" value="relevance">
+            <form action="/results" method="get">
+                <input type="text" name="keywords" class="keywords"/>
+                <select name="category" class="category">
+                    <option value="all">All Categories</option>
+                    <option value="appliances">Appliances</option>
+                    <option value="books">Books</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="tools">Tools</option>
+                    <option value="vehicles">Vehicles</option>
+                </select>
                 <input type="submit" class="search" value="Search"/>
             </form>
         </div>
     </div>
-    <div class="item-header">
+    <div class="main">
         <h1 th:text="'$' + ${item.price} + ' - ' + ${item.name}" class="header"></h1>
-    </div>
-    <div class="item-images">
-        <span th:each="image : ${images}" class="image-div">
-            <a th:href="${awsUrl} + ${image.name}" target="_blank"><img th:src="${awsUrl} + ${image.name}" class="image"></a>
-        </span>
-        <span class="map">
-            <iframe width="300" height="300" frameborder="0" style="border:0"
-                    th:src="'https://www.google.com/maps/embed/v1/place?q=' + ${item.zipCode} + '&zoom=11&key=' + ${apiKey}" allowfullscreen>
-            </iframe>
-        </span>
-    </div>
-    <div class="item-info">
-            <pre th:text="${item.description}"></pre>
-            <span class="label">Date Posted: </span><span th:text="${item.date}"></span><br /><br />
-            <span class="label">Contact Email:  </span><span th:text="${item.email}"></span><br /><br />
-            <span class="label">Contact Phone Number:  </span><span th:text="${item.phoneNumber}"></span>
+        <div class="side-images">
+            <div class="images">
+                <span th:each="image : ${images}" class="image-div">
+                    <span><img th:src="${awsUrl} + ${image.name}" onmouseover="changeImage(this)" class="image"></span>
+                </span>
+            </div>
+            <div class="selected-image">
+                <img th:src="${awsUrl} + ${images[0].name}" onclick="openImage(this)"id="main-image" class="main-image">
+            </div>
+            <div class="map">
+                <iframe width="300" height="300" frameborder="0" class="iframe"
+                        th:src="'https://www.google.com/maps/embed/v1/place?q=' + ${item.zipCode} + '&zoom=11&key=' + ${apiKey}" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+        <div class="info">
+                <span class="label">Condition: </span><span th:text="${item.itemCondition}"></span><br />
+                <pre th:text="${item.description}"></pre>
+                <span class="label">Date Posted: </span><span th:text="${item.date}"></span><br /><br />
+                <span class="label">Contact Email:  </span><span th:text="${item.email}"></span><br /><br />
+                <span class="label">Contact Phone Number:  </span><span th:text="${item.phoneNumber}"></span>
+        </div>
     </div>
 </div>
+<script src="js/item.js"></script>
 </body>
 </html>

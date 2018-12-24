@@ -1,0 +1,133 @@
+.main {
+    grid-area: main;
+    margin-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-areas:
+        'menu'
+        'main';
+}
+
+.header {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 24px;
+	margin-bottom: 30px;
+}
+
+.category-menu {
+    float: left;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.menu-label {
+    float: left;
+    padding-top: 2.4%;
+    text-align: left;
+    width: 80px;
+}
+
+.dropdown {
+    border: 1px solid black;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-left: 10px;
+    padding: 3px;
+    position: relative;
+    transformY: (-50%);
+    width: 100px;
+}
+
+.condition {
+    float: left;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 11px;
+}
+
+.error {
+    color: #CC0000;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.label {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.input {
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-bottom: 15px;
+    padding: 6px;
+    width: 900px;
+}
+
+.input:focus {
+    outline-color: black;
+}
+
+.description {
+    border: 1px solid;
+    border-radius: 3px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    height: 200px;
+    margin-bottom: 11px;
+    padding: 6px;
+    resize: none;
+    width: 900px;
+}
+
+.description:focus {
+    outline-color: black;
+}
+
+.files-label {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.files-input {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+.add-item-button {
+    background: linear-gradient(#3b4159 0%, #4a5270 20%, #2f3447 100%);
+    background-color: #4a5270;
+    border: 3px solid #3b4159;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    display: block;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 6px;
+    text-align: center;
+    width: 430px;
+}
+
+.add-item-button:hover {
+    background: linear-gradient(#2b2f40 0%, #3d435c 20%, #222533 90%);
+    background-color: #3d435c;
+    border: 3px solid #2b2f40;
+}

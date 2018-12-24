@@ -1,11 +1,12 @@
 package marketplace;
 
-import javax.sql.DataSource;
-
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+
+import javax.sql.DataSource;
+
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +16,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
+
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("search");
-        registry.addViewController("/search").setViewName("search");
         registry.addViewController("/results").setViewName("results");
         registry.addViewController("/signin").setViewName("signin");
         registry.addViewController("/myaccount").setViewName("myaccount");
         registry.addViewController("/register").setViewName("register");
-        registry.addViewController("/registersuccess").setViewName("registersuccess");
     }
 
     @Bean(name = "dataSource")

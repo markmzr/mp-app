@@ -1,0 +1,106 @@
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        'menu'
+        'main';
+}
+
+.main {
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 1080px;
+}
+
+.header {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 24px;
+}
+
+.side-images {
+    display: grid;
+    grid-area: item-images;
+    grid-template-areas:
+        'images selected-image map'
+        'images selected-image map';
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.images {
+    padding-right: 10px;
+    width: 110px;
+}
+
+.image-div {
+    border: 1px solid;
+    cursor: pointer;
+    display: inline-grid;
+    height: 110px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    position: relative;
+    width: 110px;
+}
+
+.image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.selected-image {
+    height: 380px;
+    margin: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    width: 600px;
+}
+
+.main-image {
+    cursor: pointer;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.map {
+    height: 300px;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 300px;
+}
+
+.iframe {
+    display: block;
+    border: 0;
+    max-width: 300px;
+}
+
+.info {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.info pre {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    margin-bottom: 17px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.label {
+    font-weight: bold;
+}
