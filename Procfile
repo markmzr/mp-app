@@ -1,0 +1,1 @@
+web: java -jar target/marketplace-web-app-0.1.0.jar

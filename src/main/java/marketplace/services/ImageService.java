@@ -18,18 +18,15 @@ public class ImageService {
     private ImageRepository imageRepository;
 
     public int countItemImages(int itemId) {
-        int imageCount = imageRepository.countByItemId(itemId);
-        return imageCount;
+        return imageRepository.countByItemId(itemId);
     }
 
     public Image getFirstItemImage(Item item) {
-        Image image = imageRepository.findFirstByItemId(item.getId());
-        return image;
+        return imageRepository.findFirstByItemId(item.getId());
     }
 
     public List<Image> getItemImages(int itemId) {
-        List<Image> images = imageRepository.findByItemId(itemId);
-        return images;
+        return imageRepository.findByItemId(itemId);
     }
 
     public void saveImage(Item item, MultipartFile multipartFile) {

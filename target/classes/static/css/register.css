@@ -1,73 +1,80 @@
-.main {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 60px;
-    width: 312px;
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap');
+
+@font-face {
+    font-family: 'Noto Sans Medium';
+    src: url('/css/fonts/NotoSans-Medium.woff') format('woff');
+}
+
+html, body, form, input {
+    font-family: 'Noto Sans', 'Tahoma', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.form {
+    margin: 95px auto 60px;
+    padding: 0px 20px;
+    width: 300px;
 }
 
 .header {
-    font-family: Tahoma, Geneva, sans-serif;
-	font-size: 24px;
-	margin-bottom: 30px;
+    font-family: 'Noto Sans Medium', 'Tahoma', sans-serif;
+    font-size: 24px;
+    margin-bottom: 30px;
 }
 
 .error {
     color: #CC0000;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 .label {
     float: left;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
+    font-weight: 700;
+}
+
+.input {
+    display: flex;
+    width: 100%;
+}
+
+.input input {
+    padding: 8px;
+    width: 100%;
 }
 
 .username {
-    border: 1px solid;
+    border: 1px solid #999999;
     border-radius: 3px;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-bottom: 10px;
-    margin-top: 6px;
-    padding: 6px;
-    width: 300px;
+    margin: 6px 0 12px;
+    padding: 8px;
 }
 
 .password {
-    border: 1px solid;
+    border: 1px solid #999999;
     border-radius: 3px;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-bottom: 30px;
-    margin-top: 6px;
-    padding: 6px;
-    width: 300px;
+    margin: 6px 0 35px;
+    padding: 8px;
 }
 
 .username:focus, .password:focus {
-    outline-color: black;
+    border: 1px solid #748aad;
+    box-shadow: 0px 0px 3px #748aad;
+    outline: 0px solid #748aad;
 }
 
-.create-account {
-    background: linear-gradient(#3B4159 0%, #4a5270 20%, #2f3447 100%);
-    background-color: #4a5270;
-    border: 3px solid #3B4159;
+.submit {
+    background: linear-gradient(#536283 0%, #232e46 100%);
+    border: 1px solid #111621;
     border-radius: 3px;
     color: white;
     cursor: pointer;
-    display: block;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
     margin: 0 auto;
-    padding: 6px;
-    width: 314px;
+    padding: 8px;
 }
 
-.create-account:hover {
-    background: linear-gradient(#2b2f40 0%, #3d435c 20%, #222533 90%);
-    background-color: #3d435c;
-    border: 3px solid #2b2f40;
+.submit:hover, .submit:active, .submit:focus {
+    background: linear-gradient(#47536f 0%, #192031 100%);
+    border: 1px solid #111621;
+    outline: 0px solid #111621;
 }

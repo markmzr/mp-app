@@ -25,28 +25,30 @@
                     <option value="tools">Tools</option>
                     <option value="vehicles">Vehicles</option>
                 </select>
-                <input type="submit" class="search" value="Search"/>
+                <input type="submit" value="Search" class="search-submit"/>
             </form>
         </div>
     </div>
     <div class="main">
-        <h1 class="my-account">My Account</h1>
+        <div class="header">My Account</div>
         <div class="add-item"><a href="/additem" class="link">Add Item</a></div>
-        <h1 class="my-items">My Items</h1>
-        <table>
-            <tr>
-                <th class="th1">Name</th>
-                <th class="th2">Date Posted</th>
-                <th class="th2">Edit Item</th>
-                <th class="th2">Remove Item</th>
-            </tr>
-            <tr th:each="item : ${items}">
-                <td><a th:href="@{'/item?id=' + ${item.id}}" th:text="${item.name}" class="name"></a></td>
-                <td th:text="${item.date}"></td>
-                <td><a th:href="@{'/edititem?id=' + ${item.id}}" class="link">Edit Item</a></td>
-                <td><a th:href="@{'/removeitem?id=' + ${item.id}}" class="link">Remove Item</a></td>
-            </tr>
-        </table>
+        <div class="header">My Items</div>
+        <div>
+            <table class="table">
+                <tr>
+                    <th class="th1">Name</th>
+                    <th class="th2">Date Posted</th>
+                    <th class="th2">Edit Item</th>
+                    <th class="th2">Remove Item</th>
+                </tr>
+                <tr th:each="item : ${items}">
+                    <td><a th:href="@{'/item?id=' + ${item.id}}" th:text="${item.name}" class="link"></a></td>
+                    <td th:text="${item.date}"></td>
+                    <td><a th:href="@{'/edititem?id=' + ${item.id}}" class="link">Edit Item</a></td>
+                    <td><a th:href="@{'/removeitem?id=' + ${item.id}}" class="link">Remove Item</a></td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
 </body>

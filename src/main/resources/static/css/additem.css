@@ -1,8 +1,14 @@
-.main {
-    grid-area: main;
-    margin-bottom: 60px;
-    margin-left: auto;
-    margin-right: auto;
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap');
+
+@font-face {
+    font-family: 'Noto Sans Medium';
+    src: url('/css/fonts/NotoSans-Medium.woff') format('woff');
+}
+
+html, body, form, input, textarea, select {
+    font-family: 'Noto Sans', 'Tahoma', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .grid {
@@ -12,122 +18,147 @@
         'main';
 }
 
+.main {
+    grid-area: main;
+    margin: 0 auto 60px;
+    padding: 0px 20px;
+}
+
 .header {
-	font-family: Tahoma, Geneva, sans-serif;
+    font-family: 'Noto Sans Medium', 'Tahoma', sans-serif;
 	font-size: 24px;
 	margin-bottom: 30px;
 }
 
-.category-menu {
-    float: left;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
+.form {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-areas:
+        'category condition'
+        'name name'
+        'description description'
+        'price email'
+        'zip-code phone-number'
+        'images images'
+        'add-item add-item';
+    grid-template-columns: 300px 300px;
 }
 
-.menu-label {
-    float: left;
-    padding-top: 2.4%;
-    text-align: left;
-    width: 80px;
-}
-
-.dropdown {
-    border: 1px solid black;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-left: 10px;
-    padding: 3px;
-    position: relative;
-    transformY: (-50%);
-    width: 100px;
+.categories {
+    grid-area: category;
+    margin-bottom: 3px;
 }
 
 .condition {
+    grid-area: condition;
+    margin-bottom: 3px;
+}
+
+.name {
+    grid-area: name;
+}
+
+.description {
+    grid-area: description;
+}
+
+.price {
+    grid-area: price;
+}
+
+.zip-code {
+    grid-area: zip-code;
+}
+
+.email {
+    grid-area: email;
+}
+
+.phone-number {
+    grid-area: phone-number;
+}
+
+.images {
+    grid-area: images;
+}
+
+.add-item {
+    grid-area: add-item;
+}
+
+.dropdown-label {
     float: left;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 11px;
+    font-weight: 700;
+    padding-top: 2.1%;
+}
+
+.dropdown {
+    border-color: #999999;
+    border-radius: 3px;
+    margin-left: 10px;
+    padding: 5px;
+    position: relative;
+    width: 120px;
 }
 
 .error {
     color: #CC0000;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .label {
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 6px;
 }
 
 .input {
-    border: 1px solid;
+    border: 1px solid #999999;
     border-radius: 3px;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-bottom: 15px;
-    padding: 6px;
-    width: 900px;
+    box-sizing: border-box;
+    padding: 8px;
+    width: 100%;
 }
 
-.input:focus {
-    outline-color: black;
-}
-
-.description {
-    border: 1px solid;
+.description-input {
+    border: 1px solid #999999;
     border-radius: 3px;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
+    box-sizing: border-box;
     height: 200px;
-    margin-bottom: 11px;
-    padding: 6px;
+    padding: 8px;
     resize: none;
-    width: 900px;
+    width: 100%;
 }
 
-.description:focus {
-    outline-color: black;
+.dropdown:focus, .input:focus, .description-input:focus {
+    border: 1px solid #748aad;
+    box-shadow: 0px 0px 3px #748aad;
+    outline: 0px solid #748aad;
 }
 
-.files-label {
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
+.images-label {
+    font-weight: 700;
     margin-bottom: 10px;
 }
 
-.files-input {
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
+.images-input {
     text-align: center;
 }
 
-.add-item-button {
-    background: linear-gradient(#3b4159 0%, #4a5270 20%, #2f3447 100%);
-    background-color: #4a5270;
-    border: 3px solid #3b4159;
+.submit {
+    background: linear-gradient(#536283 0%, #232e46 100%);
+    border: 1px solid #111621;
     border-radius: 3px;
     color: white;
     cursor: pointer;
     display: block;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    padding: 6px;
+    margin: 20px auto 0;
+    padding: 8px;
     text-align: center;
-    width: 430px;
+    width: 300px;
 }
 
-.add-item-button:hover {
-    background: linear-gradient(#2b2f40 0%, #3d435c 20%, #222533 90%);
-    background-color: #3d435c;
-    border: 3px solid #2b2f40;
+.submit:hover, .submit:active, .submit:focus {
+    background: linear-gradient(#47536f 0%, #192031 100%);
+    border: 1px solid #111621;
+    outline: 0px solid #111621;
 }

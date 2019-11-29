@@ -6,17 +6,15 @@
     <link rel="stylesheet" type="text/css" href="css/register.css">
 </head>
 <body>
-<div class="main">
-    <h1 class="header">Create Account</h1>
-    <form th:action="@{/register}" th:object="${user}" method="post">
-        <div class="error" th:errors="*{username}"></div>
+    <form th:action="@{/register}" th:object="${user}" method="post" class="form">
+        <div class="header">Create Account</div>
+        <div th:errors="*{username}" class="error"></div>
         <div class="label">Username</div>
-        <input type="text" th:field="*{username}" name="username" class="username"/><br />
-        <div class="error" th:errors="*{password}"></div>
+        <div class="input"><input type="text" th:field="*{username}" name="username" class="username"/></div>
+        <div th:errors="*{password}" class="error"></div>
         <div class="label">Password</div>
-        <input type="password" th:field="*{password}" name="password" class="password"/><br />
-        <input type="submit" class="create-account" value="Create Account"/>
+        <div class="input"><input type="password" th:field="*{password}" name="password" class="password"/></div>
+        <div class="input"><input type="submit" value="Create Account" class="submit"/></div>
     </form>
-</div>
 </body>
 </html>

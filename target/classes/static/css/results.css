@@ -1,35 +1,40 @@
-.main {
-    float: left;
-    grid-area: main;
-    height: 600px;
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap');
+
+@font-face {
+    font-family: 'Noto Sans Medium';
+    src: url('/css/fonts/NotoSans-Medium.woff') format('woff');
 }
 
-.side-menu {
-    border: 1px solid;
-    height: 290px;
-    margin: 10px;
-    padding: 10px;
+html, body, input, select {
+    font-family: 'Noto Sans', 'Tahoma', sans-serif;
+    font-size: 14px;
+}
+
+body {
+    background-color: #f6f6f6;
 }
 
 .grid {
+    background-color: #f6f6f6;
     display: grid;
     grid-template-areas:
         'menu menu'
         'header header'
         'side-menu main';
-    grid-template-columns: 220px auto;
+    grid-template-columns: 250px auto;
 }
 
-.condition {
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
+.side-menu {
+    background-color: white;
+    border: 1px solid #b7b7b7;
+    height: 184px;
+    margin: 0 20px;
+    padding: 10px 10px 15px;
 }
 
 .condition-label {
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 3px;
+    font-weight: 700;
+    margin-bottom: 5px;
 }
 
 .checkbox {
@@ -42,92 +47,74 @@
 }
 
 .distance {
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
     margin-top: 10px;
 }
 
 .distance-label {
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 6px;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
 .miles {
-    border: 1px solid black;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
+    border: 1px solid #b7b7b7;
+    box-sizing: border-box;
     margin-left: 4px;
     margin-right: 3px;
-    padding-bottom: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 3px;
-    width: 40px;
+    padding: 5px 7px;
+    width: 52px;
 }
 
 .zip-code {
-    border: 1px solid black;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
+    border: 1px solid #b7b7b7;
+    box-sizing: border-box;
     margin-left: 8px;
-    padding-bottom: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 3px;
-    width: 60px;
+    padding: 5px 7px;
+    width: 75px;
 }
 
 .miles:focus, .zip-code:focus {
-    outline-color: black;
+    border: 1px solid #748aad;
+    box-shadow: 0px 0px 3px #748aad;
+    outline: 0px solid #748aad;
 }
 
-.distance-submit {
-    background: linear-gradient(#b7b7b7 0%, white 20%, #9b9b9b 90%);
-    background-color: #b7b7b7;
-    border: 1px solid black;
+.submit {
+    background: linear-gradient(#536283 0%, #232e46 100%);
+    border: 1px solid #111621;
     border-radius: 3px;
-    color: black;
+    color: white;
     cursor: pointer;
     display: block;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 9px;
-    padding-bottom: 6px;
-    padding-left: 11px;
-    padding-right: 11px;
-    padding-top: 6px;
+    margin: 15px auto 0;
+    padding: 7px 14px;
 }
 
-.distance-submit:hover {
-    background: linear-gradient(#a1a1a1 0%, #e6e6e6 20%, #7d7d7d 90%);
-    background-color: #a1a1a1;
-    border: 1px solid black;
+.submit:hover, .submit:active, .submit:focus {
+    background: linear-gradient(#47536f 0%, #192031 100%);
+    border: 1px solid #111621;
+    outline: 0px solid #111621;
 }
 
 .header {
+    background-color: white;
+    border-bottom: 1px solid #b7b7b7;
+    box-shadow: 0px 2px 5px 1px #d7d7d7;
     display: grid;
     grid-area: header;
     grid-template-columns: 33.33% 33.33% 33.34%;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin: -60px 0 20px;
     min-width: 900px;
+    padding: 10px;
     width: 100%;
 }
 
-.results {
-    margin-top: 6px;
+.results-info {
+    margin-top: 5px;
     text-align: center;
 }
 
-.result-count, .result-label {
-	font-family: Tahoma, Geneva, sans-serif;
-	font-size: 14px;
-	margin-left: auto;
-	margin-right: auto;
+.item-count, .message {
+    margin: 0px auto;
 }
 
 .sort {
@@ -137,65 +124,91 @@
 
 .sort-label {
     display: inline-block;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
     margin-right: 6px;
     position: relative;
     transform: translateY(30%);
 }
 
 .dropdown {
-    border-color: black;
+    border-color: #b7b7b7;
     float: right;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
+    margin-right: 10px;
     padding: 3px;
 }
 
-.item {
-    border: 1px solid;
-    border-radius: 6px;
-    display: inline-grid;
+.dropdown:focus {
+    border: 1px solid #748aad;
+    outline: 0px solid white;
+}
+
+.main {
+    background-color: #f6f6f6;
     float: left;
-    height: 300px;
-    margin: 10px;
-    position: relative;
+    grid-area: main;
+    padding-right: 20px;
+    margin-bottom: 60px;
+}
+
+.item {
+    background-color: white;
+    border: 1px solid #b7b7b7;
+    border-radius: 6px;
+    box-shadow: 0px 2px 5px 1px #d7d7d7;
+    box-sizing: border-box;
+    display: grid;
+    float: left;
+    grid-template-areas:
+        'image'
+        'name';
+    grid-template-rows: 265px 43px;
+    margin: 0 15px 15px 0;
+    padding: 15px;
     width: 300px;
 }
 
-.item:hover {
-    box-shadow: 0 0 3px black;
+.item:focus, .item:hover {
+    border: 1px solid #748aad;
+    box-shadow: 0px 0px 5px 0px #748aad;
 }
 
 .item img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 70%;
+    left: 50%;
+    position: absolute;
+    top: calc(50% - 5px);
+    transform: translate(-50%, -50%);
+    max-height: 255px;
     max-width: 100%;
+}
+
+.image {
+    box-sizing: border-box;
+    grid-area: image;
     position: relative;
-    top: 40%;
-    transform: translateY(-50%);
+}
+
+.price {
+    background-color: white;
+    border: 1px solid #b7b7b7;
+    border-radius: 3px;
+    bottom: 10px;
+    font-size: 16px;
+    padding: 0px 7px;
+    position: absolute;
+    z-index: 10;
 }
 
 .item-name {
-    bottom: 0;
-    color: black;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    height: 20%;
-    margin: 5px;
-    overflow: hidden;
-    position: absolute;
+    font-size: 16px;
+    grid-area: name;
 }
 
 .item-name a {
-    color: #3399ff;
+    color: black;
     text-decoration: none;
 }
 
 .item-name a:hover, .item-name a:active {
-    text-decoration: underline;
+    color: #2b66b5;
 }
 
 .item-latitude, .item-longitude {

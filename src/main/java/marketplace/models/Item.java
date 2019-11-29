@@ -3,6 +3,7 @@ package marketplace.models;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
@@ -14,17 +15,17 @@ public class Item {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
-    @NotEmpty(message = "Name is required")
+    @Column(name = "name", length = 50)
+    @NotEmpty(message = "* Name is required")
+    @Length(max = 50, message = "* Maximum length is 50 characters")
     private String name;
 
     @Column(name = "description", columnDefinition="text")
-    @NotEmpty(message = "Description is required")
+    @NotEmpty(message = "* Description is required")
     private String description;
 
     @Column(name = "price")
-    @NotEmpty(message = "Price is required")
-    @Range(min = 0l, message = "Price must be a positive integer")
+    @Range(min = 0l, message = "* Price must be a positive integer")
     private String price;
 
     @Column(name = "category")
@@ -34,15 +35,15 @@ public class Item {
     private String itemCondition;
 
     @Column(name = "zipcode")
-    @Range(min = 0l, max = 99999, message = "A valid zip code is required")
+    @Range(min = 0l, max = 99999, message = "* Valid zip code is required")
     private String zipCode;
 
     @Column(name = "email")
-    @NotEmpty(message = "Contact email is required")
+    @NotEmpty(message = "* Contact email is required")
     private String email;
 
     @Column(name = "phonenumber")
-    @NotEmpty(message = "Contact phone number is required")
+    @NotEmpty(message = "* Contact phone number is required")
     private String phoneNumber;
 
     @Column(name = "username")

@@ -6,16 +6,14 @@
     <link rel="stylesheet" type="text/css" href="css/signin.css">
 </head>
 <body>
-<div class="main">
-    <h1 class="header">Sign In</h1>
-    <div class="error" th:if="${param.error}">Invalid username or password</div>
-    <form th:action="@{/signin}" method="post">
+    <form th:action="@{/signin}" method="post" class="form">
+        <div class="header">Sign In</div>
+        <div th:if="${param.error}" class="error">* Invalid username or password</div>
         <div class="label">Username</div>
-        <input type="text" name="username" class="username"/><br />
+        <div class="input"><input type="text" name="username" class="username"/></div>
         <div class="label">Password</div>
-        <input type="password" name="password" class="password"/><br />
-        <input type="submit" class="sign-in" value="Sign In"/>
+        <div class="input"><input type="password" name="password" class="password"/></div>
+        <div class="input"><input type="submit" value="Sign In" class="submit" /></div>
     </form>
-</div>
 </body>
 </html>

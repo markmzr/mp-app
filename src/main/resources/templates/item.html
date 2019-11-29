@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/css/item.css">
 </head>
 <body>
-<div class="grid-container">
+<div class="grid">
     <div class="menu">
         <span><a href="/" class="menu-link">Home</a></span>
         <span><a href="/myaccount" class="menu-link">My Account</a></span>
@@ -25,33 +25,36 @@
                     <option value="tools">Tools</option>
                     <option value="vehicles">Vehicles</option>
                 </select>
-                <input type="submit" class="search" value="Search"/>
+                <input type="submit" value="Search" class="search-submit"/>
             </form>
         </div>
     </div>
     <div class="main">
-        <h1 th:text="'$' + ${item.price} + ' - ' + ${item.name}" class="header"></h1>
-        <div class="side-images">
-            <div class="images">
-                <span th:each="image : ${images}" class="image-div">
-                    <span><img th:src="${awsUrl} + ${image.name}" onmouseover="changeImage(this)" class="image"></span>
+        <div th:text="'$' + ${item.price} + ' - ' + ${item.name}" class="header"></div>
+        <div class="images">
+            <div class="thumbnails">
+                <span th:each="image : ${images}" th:id="${imageStat.first}? 'first-image'" class="image">
+                    <span><img th:src="${awsUrl} + ${image.name}" onmouseover="changeImage(this)"></span>
                 </span>
             </div>
             <div class="selected-image">
-                <img th:src="${awsUrl} + ${images[0].name}" onclick="openImage(this)"id="main-image" class="main-image">
+                <img th:src="${awsUrl} + ${images[0].name}" onclick="openImage(this)" id="selected-image">
             </div>
             <div class="map">
-                <iframe width="300" height="300" frameborder="0" class="iframe"
-                        th:src="'https://www.google.com/maps/embed/v1/place?q=' + ${item.zipCode} + '&zoom=11&key=' + ${apiKey}" allowfullscreen>
+                <iframe th:src="'https://www.google.com/maps/embed/v1/place?q=' + ${item.zipCode} + '&zoom=12&key=' + ${apiKey}"
+                        frameborder="0" allowfullscreen class="iframe">
                 </iframe>
             </div>
         </div>
         <div class="info">
-                <span class="label">Condition: </span><span th:text="${item.itemCondition}"></span><br />
-                <pre th:text="${item.description}"></pre>
-                <span class="label">Date Posted: </span><span th:text="${item.date}"></span><br /><br />
-                <span class="label">Contact Email:  </span><span th:text="${item.email}"></span><br /><br />
-                <span class="label">Contact Phone Number:  </span><span th:text="${item.phoneNumber}"></span>
+            <div class="label">Condition: <span th:text="${item.itemCondition}" class="text"></span></div>
+            <div class="label">Date Posted: <span th:text="${item.date}" class="text"></span></div>
+            <pre th:text="${item.description}"></pre>
+        </div>
+        <div class="contact-info">
+            <div class="header-small">Contact Seller</div>
+            <div class="label">Email: <span th:text=" ${item.email}" class="text"></span></div>
+            <div class="label">Phone Number: <span th:text=" ${item.phoneNumber}" class="text"></span></div>
         </div>
     </div>
 </div>

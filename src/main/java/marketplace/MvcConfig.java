@@ -1,9 +1,8 @@
 package marketplace;
 
-import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 import javax.sql.DataSource;
 
@@ -43,9 +42,10 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Bean(name = "s3")
     public AmazonS3 s3() {
-        AmazonS3 s3 = new AmazonS3Client();
-        Region usEast1 = Region.getRegion(Regions.US_EAST_1);
-        s3.setRegion(usEast1);
+        Regions region = Regions.US_EAST_2;
+        AmazonS3 s3 = AmazonS3ClientBuilder.standard()
+                .withRegion(region)
+                .build();
         return s3;
     }
 }

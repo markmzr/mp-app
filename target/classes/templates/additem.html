@@ -26,15 +26,16 @@
                     <option value="tools">Tools</option>
                     <option value="vehicles">Vehicles</option>
                 </select>
-                <input type="submit" class="search" value="Search"/>
+                <input type="submit" value="Search" class="search-submit"/>
             </form>
         </div>
     </div>
     <div class="main">
-        <h1 class="header">Add Item</h1>
-        <form action="#" th:action="@{/additem}" th:object="${item}" id="addItemForm" enctype="multipart/form-data" method="post">
-            <div class="category-menu">
-                <div class="menu-label">Category:</div>
+        <div class="header">Add Item</div>
+        <form action="#" th:action="@{/additem}" th:object="${item}"
+              enctype="multipart/form-data" method="post" class="form" id="addItemForm">
+            <div class="categories">
+                <span class="dropdown-label">Category</span>
                 <span>
                     <select th:field="*{category}" class="dropdown">
                         <option value="appliances">Appliances</option>
@@ -45,38 +46,54 @@
                         <option value="vehicles">Vehicles</option>
                     </select>
                 </span>
-            </div><br /><br />
+            </div>
             <div class="condition">
-                <div class="menu-label">Condition:</div>
+                <div class="dropdown-label">Condition</div>
                 <span>
                     <select th:field="*{itemCondition}" class="dropdown">
                         <option value="New">New</option>
                         <option value="Used">Used</option>
                     </select>
                 </span>
-            </div><br /><br /><br />
-            <div th:errors="*{name}" class="error"></div>
-            <div class="label">Name</div>
-            <input type="text" th:field="*{name}" class="input"/><br />
-            <div th:errors="*{description}" class="error"></div>
-            <div class="label">Description</div>
-            <textarea th:field="*{description}" class="description"></textarea><br />
-            <div th:errors="*{price}" class="error"></div>
-            <div class="label">Price</div>
-            <input type="text" th:field="*{price}" class="input"><br />
-            <div th:errors="*{zipCode}" class="error" id="zipCodeError"></div>
-            <div class="label">Zip Code</div>
-            <input type="text" th:field="*{zipCode}" class="input" id="zipCode"/><br />
-            <div th:errors="*{email}" class="error"></div>
-            <div class="label">Contact Email</div>
-            <input type="text" th:field="*{email}" class="input"><br />
-            <div th:errors="*{phoneNumber}" class="error"></div>
-            <div class="label">Contact Phone Number</div>
-            <input type="text" th:field="*{phoneNumber}" class="input"><br />
-            <div th:text="${imageError}" class="error"></div>
-            <div class="files-label">Item Images</div>
-            <input type="file" name="files" class="files-input" accept="image/*" multiple><br />
-            <input type="submit" class="add-item-button" value="Add Item"/>
+            </div>
+            <div class="name">
+                <div th:errors="*{name}" class="error"></div>
+                <div class="label">Name</div>
+                <input type="text" th:field="*{name}" maxlength="50" class="input"/>
+            </div>
+            <div class="description">
+                <div th:errors="*{description}" class="error"></div>
+                <div class="label">Description</div>
+                <textarea th:field="*{description}" class="description-input"></textarea>
+            </div>
+            <div class="price">
+                <div th:errors="*{price}" class="error"></div>
+                <div class="label">Price</div>
+                <input type="text" th:field="*{price}" class="input">
+            </div>
+            <div class="zip-code">
+                <div th:errors="*{zipCode}" class="error" id="zipCodeError"></div>
+                <div class="label">Zip Code</div>
+                <input type="text" th:field="*{zipCode}" class="input" id="zipCode"/>
+            </div>
+            <div class="email">
+                <div th:errors="*{email}" class="error"></div>
+                <div class="label">Contact Email</div>
+                <input type="text" th:field="*{email}" class="input">
+            </div>
+            <div class="phone-number">
+                <div th:errors="*{phoneNumber}" class="error"></div>
+                <div class="label">Contact Phone Number</div>
+                <input type="text" th:field="*{phoneNumber}" class="input">
+            </div>
+            <div class="images">
+                <div th:text="${imageError}" class="error"></div>
+                <div class="images-label">Item Images</div>
+                <input type="file" name="files" accept="image/*" multiple class="images-input">
+            </div>
+            <div class="add-item">
+                <input type="submit" value="Add Item" class="submit"/>
+            </div>
         </form>
     </div>
 </div>

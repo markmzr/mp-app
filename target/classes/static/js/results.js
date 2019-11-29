@@ -1,84 +1,112 @@
-// Set the filtering and sorting options that are selected on the page based on the URL parameters
+setCategory();
 setCondition();
 setDistance();
 setSort();
 
-// Update page when user applies the distance filter
 $('#distanceForm').submit(function() {
     updateDistance();
     return false;
     });
 
-// Set the item conditions that are selected in the side menu based on the condition URL parameter
+function setCategory() {
+    var url = new URL(window.location.href);
+    var parameters = new URLSearchParams(url.search);
+    var category = parameters.get("category");
+    var dropdown = document.getElementById("category");
+
+    for (var i = 0; i < dropdown.options.length; i++) {
+        if (dropdown.options[i].value == category) {
+            dropdown.options[i].selected = true;
+        }
+    }
+}
+
 function setCondition() {
     var url = new URL(window.location.href);
     var parameters = new URLSearchParams(url.search);
     var condition = parameters.get("condition");
 
-    if (condition == "all") {
-        document.getElementById("new").checked = false;
-        document.getElementById("used").checked = false;
-    }
-    else if (condition == "any") {
-        document.getElementById("new").checked = true;
-        document.getElementById("used").checked = true;
-    }
-    else if (condition == "new") {
-        document.getElementById("new").checked = true;
-    }
-    else if (condition == "used") {
-        document.getElementById("used").checked = true;
+    switch (condition) {
+        case "all":
+            document.getElementById("new").checked = false;
+            document.getElementById("used").checked = false;
+            break;
+        case "any":
+            document.getElementById("new").checked = true;
+            document.getElementById("used").checked = true;
+            break;
+        case "new":
+            document.getElementById("new").checked = true;
+            break;
+        case "used":
+            document.getElementById("used").checked = true;
+            break;
     }
 }
 
-// Set the items that are displayed in the search results based on the distance URL parameter
 function setDistance() {
     var url = new URL(window.location.href);
     var parameters = new URLSearchParams(url.search);
 
-    if (parameters.has("miles") && parameters.has("zipCode")) {
-        // Get latitude and longitude of the user provided zip code from Google API
+    if (parameters.has("miles") && parameters.get("miles").length > 0
+        && parameters.has("zipCode") && parameters.get("zipCode").length > 0) {
         var xhttp = new XMLHttpRequest();
         var zipCode = parameters.get("zipCode");
         var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + zipCode + ",US&sensor=false&key=" + apiKey;
 
         xhttp.onload = function() {
             if (this.readyState == 4 && this.status == 200) {
-                // Parse JSON response to get the latitude and longitude of zip code
                 var jsonResponse = JSON.parse(this.responseText);
                 var results = jsonResponse.results;
                 var userLocation = results[0].geometry.location;
                 var userLatLng = new google.maps.LatLng(userLocation.lat, userLocation.lng);
 
-                var itemResults = document.getElementsByClassName("item");
-                for (i = 0; i < itemResults.length; i++) {
-                    // Get the latitude and longitude of each item in the search results
-                    var itemLatClass = itemResults[i].getElementsByClassName("item-latitude");
+                var items = document.getElementsByClassName("item");
+                var removedItems = [];
+                var removeCount = 0;
+                for (i = 0; i < items.length; i++) {
+                    var itemLatClass = items[i].getElementsByClassName("item-latitude");
                     var itemLatitude = itemLatClass[0].innerHTML;
-                    var itemLongClass = itemResults[i].getElementsByClassName("item-longitude");
+                    var itemLongClass = items[i].getElementsByClassName("item-longitude");
                     var itemLongitude = itemLongClass[0].innerHTML;
 
-                    // Calculate distance between user's zip code and item location in miles
                     var itemLatLng = new google.maps.LatLng(itemLatitude, itemLongitude);
                     var metersDistance = google.maps.geometry.spherical.computeDistanceBetween(userLatLng, itemLatLng);
                     var milesDistance = metersDistance * 0.000621371;
 
                     var userMiles = parameters.get("miles");
                     if (milesDistance > userMiles) {
-                        // Remove item from search results and update result count
-                        var parentNode = itemResults[i].parentNode.removeChild(itemResults[i]);
-
-                        var resultCount = document.getElementsByClassName("result-count");
-                        resultCount[0].innerHTML -= 1;
-                        var resultLabel = document.getElementsByClassName("result-label");
-
-                        if (resultCount[0].innerHTML == 1) {
-                            resultLabel[0].innerHTML = " Result";
-                        }
-                        else {
-                            resultLabel[0].innerHTML = " Results";
-                        }
+                        items[i].id = "id" + removeCount;
+                        removeCount++;
                     }
+                }
+                for (j = 0; j < removeCount; j++) {
+                    var removedItem = document.getElementById("id" + j);
+                    removedItem.parentNode.removeChild(removedItem);
+                }
+
+                var itemCount = document.getElementById("item-count");
+                itemCount.innerHTML -= removeCount;
+
+                var resultsMes = document.getElementById("results");
+                if (itemCount.innerHTML == 1) {
+                    resultsMes.innerHTML = " result for ";
+                } else {
+                    resultsMes.innerHTML = " results for ";
+                }
+
+                var message = document.getElementById("message");
+                var keywords = parameters.get("keywords");
+                if (keywords.length == 0) {
+                    var category = parameters.get("category");
+                    if (category == "all") {
+                        message.innerHTML = "All Categories";
+                    } else {
+                        var categoryCapitalized = category.charAt(0).toUpperCase() + category.slice(1);
+                        message.innerHTML = categoryCapitalized;
+                    }
+                } else {
+                    message.innerHTML = '"' + keywords + '"';
                 }
 
                 var milesInput = document.getElementById("miles");
@@ -93,7 +121,6 @@ function setDistance() {
     }
 }
 
-// Set the sorting option that is selected based on the sort URL parameter
 function setSort() {
     var url = new URL(window.location.href);
     var parameters = new URLSearchParams(url.search);
@@ -110,7 +137,6 @@ function setSort() {
     }
 }
 
-// Update item condition parameter in the URL and refresh page when user changes the item condition filter
 function updateCondition() {
     var url = new URL(window.location.href);
     var parameters = new URLSearchParams(url.search);
@@ -129,12 +155,10 @@ function updateCondition() {
     else if (usedChecked) {
         parameters.set('condition', 'used');
     }
-
     window.history.replaceState({}, '', '/results?' + parameters);
     window.location.assign(window.location.href);
 }
 
-// Update miles and zip code parameters in the URL and refresh page when the user changes the distance filter
 function updateDistance() {
     var url = new URL(window.location.href);
     var parameters = new URLSearchParams(url.search);
@@ -149,17 +173,14 @@ function updateDistance() {
         parameters.set("miles", miles);
         parameters.set("zipCode", zipCode);
     }
-
     window.history.replaceState({}, '', '/results?' + parameters);
     window.location.assign(window.location.href);
 }
 
-// Update item sorting parameter in the URL and refresh page when the user changes the sorting option
 function updateSort(value) {
     var url = new URL(window.location.href);
     var params = new URLSearchParams(url.search);
     params.set("sort", value);
-
     window.history.replaceState({}, '', '/results?' + params);
     window.location.assign(window.location.href);
 }

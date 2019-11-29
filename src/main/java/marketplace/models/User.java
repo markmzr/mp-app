@@ -15,11 +15,11 @@ public class User {
     private long id;
 
     @Column(name = "username")
-    @NotEmpty(message = "Username is required")
+    @NotEmpty(message = "* Username is required")
     private String username;
 
     @Column(name = "password")
-    @Length(min = 6, message = "Password must be a minimum of 6 characters")
+    @Length(min = 6, message = "* Password must be at least of 6 characters")
     private String password;
 
     @Column(name = "enabled")

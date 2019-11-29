@@ -1,7 +1,14 @@
-.main {
-    grid-area: main;
-    margin-left: auto;
-    margin-right: auto;
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400&display=swap');
+
+@font-face {
+    font-family: 'Noto Sans Medium';
+    src: url('/css/fonts/NotoSans-Medium.woff') format('woff');
+}
+
+html, body {
+    font-family: 'Noto Sans', 'Tahoma', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .grid {
@@ -11,79 +18,70 @@
         'main';
 }
 
-.my-account {
-	font-family: Tahoma, Geneva, sans-serif;
+.main {
+    grid-area: main;
+    margin: 0 auto 60px;
+    padding: 0px 20px;
+    max-width: 900px;
+    min-width: 750px;
+    width: 100%;
+}
+
+.main > a {
+    color: black;
+    text-decoration: underline;
+}
+
+.header {
+    font-family: 'Noto Sans Medium', 'Tahoma', sans-serif;
 	font-size: 24px;
 	margin-bottom: 30px;
 }
 
 .add-item {
-    margin-left: 10px;
+    margin: 0 0 50px 10px;
 }
 
 .link {
     color: black;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
     text-decoration: none;
 }
 
-.link:active, .link:hover {
+.link:hover, .link:active {
+    color: #2b66b5;
     text-decoration: underline;
 }
 
-.my-items {
-	font-family: Tahoma, Geneva, sans-serif;
-	font-size: 24px;
-	margin-top: 30px;
-	margin-bottom: 30px;
-}
-
-table {
-    border: 1px solid black;
+.table {
+    border: 1px solid #b7b7b7;
     border-collapse: collapse;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
     margin-left: 10px;
-    width: 900px;
+    text-align: left;
+    width: 100%;
 }
 
 .th1 {
-    background-color: #2f3447;
-    color: white;
-    padding-bottom: 12px;
-    padding-left: 10px;
-    padding-top: 12px;
+    background-color: #e2e2e2;
+    border: 1px solid #b7b7b7;
+    color: black;
+    font-weight: 400;
+    min-width: 410px;
+    padding: 15px;
     width: 58%;
 }
 
 .th2 {
-    background-color: #2f3447;
-    color: white;
-    padding-bottom: 12px;
-    padding-left: 10px;
-    padding-top: 12px;
+    background-color: #e2e2e2;
+    border: 1px solid #b7b7b7;
+    color: black;
+    font-weight: 400;
+    min-width: 105px;
+    padding: 15px;
     width: 14%;
 }
 
-th, td {
-    border: 1px solid black;
-    padding-bottom: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 8px;
-    text-align: left;
-}
-
-tr:hover {
-    background-color: #e2e2e2;
-}
-
-.name {
-    color: #488bce;
-    text-decoration: none;
-}
-
-.name:active, .name:hover {
-    text-decoration: underline;
+td {
+    border: 1px solid #b7b7b7;
+    border-radius: 3px;
+    padding: 15px;
 }

@@ -26,16 +26,16 @@
                     <option value="tools">Tools</option>
                     <option value="vehicles">Vehicles</option>
                 </select>
-                <input type="submit" class="search" value="Search"/>
+                <input type="submit" value="Search" class="search-submit"/>
             </form>
         </div>
     </div>
     <div class="main">
-        <h1 class="header">Edit Item</h1>
-        <form action="#" th:action="@{'/edititem?id=' + ${item.id}}" th:object="${item}" id="editItemForm"
-              enctype="multipart/form-data" method="post">
-            <div class="category-menu">
-                <div class="menu-label">Category:</div>
+        <div class="header">Edit Item</div>
+        <form action="#" th:action="@{'/edititem?id=' + ${item.id}}" th:object="${item}"
+              enctype="multipart/form-data" method="post" class="form" id="editItemForm">
+            <div class="categories">
+                <span class="dropdown-label">Category</span>
                 <span>
                     <select th:field="*{category}" class="dropdown">
                         <option value="appliances">Appliances</option>
@@ -46,59 +46,75 @@
                         <option value="vehicles">Vehicles</option>
                     </select>
                 </span>
-            </div><br /><br />
+            </div>
             <div class="condition">
-                <div class="menu-label">Condition:</div>
+                <div class="dropdown-label">Condition</div>
                 <span>
                     <select th:field="*{itemCondition}" class="dropdown">
                         <option value="New">New</option>
                         <option value="Used">Used</option>
                     </select>
                 </span>
-            </div><br /><br /><br />
-            <div th:errors="*{name}" class="error" ></div>
-            <div class="label">Name</div>
-            <input type="text" th:field="*{name}" class="input"/><br />
-            <div th:errors="*{description}" class="error" ></div>
-            <div class="label">Description</div>
-            <textarea th:field="*{description}" class="description"></textarea><br />
-            <div th:errors="*{price}" class="error" ></div>
-            <div class="label">Price</div>
-            <input type="text" th:field="*{price}" class="input"><br />
-            <div th:errors="*{zipCode}" class="error" ></div>
-            <div class="label">Zip Code</div>
-            <input type="text" th:field="*{zipCode}" class="input"/><br />
-            <div th:errors="*{email}" class="error" ></div>
-            <div class="label">Contact Email</div>
-            <input type="text" th:field="*{email}" class="input"><br />
-            <div th:errors="*{phoneNumber}" class="error" ></div>
-            <div class="label">Contact Phone Number</div>
-            <input type="text" th:field="*{phoneNumber}" class="input">
-            <div class="images-label" th:text="'At least 1 image is required. ' + ${images.size()} + ' out of 3 images in use.'"></div>
-            <table>
-                <tr>
-                    <td th:each="image : ${images}">
-                        <a th:href="@{${awsUrl} + ${image.name}}" target="_blank">
-                            <img th:src="${awsUrl} + ${image.name}" class="item-image">
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td th:each="image : ${images}">
-                        <div th:switch="${images.size()}">
-                            <span th:case="1">To remove this image, add a second image.</span>
-                            <span th:case="*"><a th:href="'/removeimage/' + ${image.name}">Remove</a></span>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <div th:if="${imageError}" class="error" th:text="${imageError}"></div>
-            <div class="files-label">Item Images</div>
-            <div th:switch="${images.size()}">
-                <span th:case="3" class="files-input">Maximum number of images in use, additional images may not be uploaded.</span>
-                <span th:case="*"><input type="file" name="files" class="files-input" accept="image/*" multiple></span>
             </div>
-            <input type="submit" class="edit-item-button" value="Edit Item"/>
+            <div class="name">
+                <div th:errors="*{name}" class="error"></div>
+                <div class="label">Name</div>
+                <input type="text" th:field="*{name}" maxlength="50" class="input"/>
+            </div>
+            <div class="description">
+                <div th:errors="*{description}" class="error"></div>
+                <div class="label">Description</div>
+                <textarea th:field="*{description}" class="description-input"></textarea>
+            </div>
+            <div class="price">
+                <div th:errors="*{price}" class="error"></div>
+                <div class="label">Price</div>
+                <input type="text" th:field="*{price}" class="input">
+            </div>
+            <div class="zip-code">
+                <div th:errors="*{zipCode}" class="error"></div>
+                <div class="label">Zip Code</div>
+                <input type="text" th:field="*{zipCode}" class="input"/>
+            </div>
+            <div class="email">
+                <div th:errors="*{email}" class="error"></div>
+                <div class="label">Contact Email</div>
+                <input type="text" th:field="*{email}" class="input">
+            </div>
+            <div class="phone-number">
+                <div th:errors="*{phoneNumber}" class="error"></div>
+                <div class="label">Contact Phone Number</div>
+                <input type="text" th:field="*{phoneNumber}" class="input">
+            </div>
+            <div class="images">
+                <div th:text="'At least 1 image is required. ' + ${images.size()} + ' out of 3 images in use.'" class="images-label"></div>
+                <table>
+                    <tr>
+                        <td th:each="image : ${images}">
+                            <a th:href="@{${awsUrl} + ${image.name}}" target="_blank">
+                                <img th:src="${awsUrl} + ${image.name}" class="thumbnail">
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td th:each="image : ${images}">
+                            <div th:switch="${images.size()}">
+                                <span th:case="1">To remove this image, add a second image.</span>
+                                <span th:case="*"><a th:href="'/removeimage/' + ${image.name}">Remove</a></span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div th:if="${imageError}" th:text="${imageError}" class="error"></div>
+                <div class="files-label">Item Images</div>
+                <div th:switch="${images.size()}">
+                    <span th:case="3" class="files-input">Maximum number of images in use, additional images may not be uploaded.</span>
+                    <span th:case="*"><input type="file" name="files" accept="image/*" multiple class="files-input"></span>
+                </div>
+            </div>
+            <div class="edit-item">
+                <input type="submit" value="Edit Item" class="submit"/>
+            </div>
         </form>
     </div>
 </div>

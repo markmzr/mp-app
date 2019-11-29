@@ -1,22 +1,27 @@
-// Set the box shadow for the first image that's selected
-var image = document.getElementsByClassName("image-div")[0];
-image.style.setProperty("box-shadow", "0 0 6px black");
+setFirstImageStyle();
 
-// Change the image that's displayed when the user mouse overs a different image
+function setFirstImageStyle() {
+    var firstImage = document.getElementById("first-image");
+    firstImage.style.setProperty("border", "1px solid #748aad");
+    firstImage.style.setProperty("box-shadow", "0 0 3px #748aad");
+}
+
 function changeImage(image) {
-    var images = document.getElementsByClassName("image-div");
+    var images = document.getElementsByClassName("image");
     for (i = 0; i < images.length; i++) {
+        images[i].style.removeProperty("border");
         images[i].style.removeProperty("box-shadow");
+        images[i].style.removeProperty("outline");
+        images[i].style.setProperty("border", "1px solid #b7b7b7");
     }
-
     var imageDiv = image.parentNode.parentNode;
-    imageDiv.style.setProperty("box-shadow", "0 0 6px black");
+    imageDiv.style.setProperty("border", "1px solid #748aad");
+    imageDiv.style.setProperty("box-shadow", "0 0 3px #748aad");
 
-    var mainImage = document.getElementById("main-image");
+    var mainImage = document.getElementById("selected-image");
     mainImage.src = image.src;
 }
 
-// Open the selected image in a new window
 function openImage(image) {
     window.open(image.src, "_blank");
 }

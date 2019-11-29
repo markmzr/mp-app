@@ -1,11 +1,9 @@
-// Get the item's latitude and longitude before submitting the form
 $('#editItemForm').submit(function(event) {
-    getLatLong(setLatLong);
+    getItemLatLong(setItemLatLong);
     event.preventDefault();
     });
 
-// Get the item's latitude and longitude using Google Maps API
-function getLatLong(setLatLong) {
+function getItemLatLong(setItemLatLong) {
     var xhttp = new XMLHttpRequest();
     var zipCode = document.getElementById("zipCode").value;
     var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + zipCode + ",US&sensor=false&key=" + apiKey;
@@ -16,19 +14,17 @@ function getLatLong(setLatLong) {
             var results = jsonResponse.results;
             var latitude = results[0].geometry.location.lat;
             var longitude = results[0].geometry.location.lng;
-            setLatLong(latitude, longitude);
+            setItemLatLong(latitude, longitude);
         }
         if (this.readyState == 4 && this.status == 400) {
-            setLatLong(0, 0);
+            setItemLatLong(0, 0);
         }
     };
-
     xhttp.open("GET", url, true);
     xhttp.send();
 }
 
-// Add the latitude and longitude values to the form and submit it
-function setLatLong(latitude, longitude) {
+function setItemLatLong(latitude, longitude) {
     var latitudeDiv = document.createElement("input");
     latitudeDiv.setAttribute("type", "text");
     latitudeDiv.setAttribute("name", "latitude");
@@ -45,5 +41,3 @@ function setLatLong(latitude, longitude) {
 
     document.getElementById("editItemForm").submit();
 }
-
-

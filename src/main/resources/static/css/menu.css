@@ -1,21 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+
 html, body {
     margin: 0px;
     padding: 0px;
 }
 
-.menu {
-    background-color: #2f3447;
-    font-family: Tahoma, Geneva, sans-serif;
+.menu, .menu a, .keywords, .category, .search-submit {
+    font-family: 'Noto Sans', sans-serif;
     font-size: 14px;
+}
+
+.menu {
+    background-color: #232e46;
     grid-area: menu;
     margin-bottom: 60px;
-    padding-left: 10px;
-    padding-top: 10px;
+    padding: 10px 0 0 10px;
 }
 
 .menu > span {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0 10px;
 }
 
 .menu-link {
@@ -24,6 +27,7 @@ html, body {
 }
 
 .menu-link:hover, .menu-link:active {
+    color: white;
     text-decoration: underline;
 }
 
@@ -34,50 +38,47 @@ html, body {
 }
 
 .keywords {
-    border: 0px solid;
+    border: 1px solid white;
     border-radius: 3px;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
-    margin-right: 3px;
-    margin-top: 10px;
+    box-shadow: border-box;
+    margin: 10px 3px 0 0;
     min-width: 300px;
-    padding: 6px;
+    padding: 7px 8px;
     width: 50%;
 }
 
+.keywords:focus {
+    border: 1px solid #748aad;
+    outline: 0px solid #748aad;
+}
+
 .category {
-    border: 0px solid;
+    border: 1px solid white;
     border-radius: 3px;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
+    box-shadow: border-box;
     margin-right: 6px;
-    padding: 5px;
-    width: 126px;
+    padding: 6px 8px;
 }
 
-.keywords:focus, .category:focus {
-    outline-color: #b7b7b7;
+.category:focus {
+    border: 1px solid #748aad;
+    outline: 0px solid white;
 }
 
-.search {
-    background: linear-gradient(#b7b7b7 0%, white 20%, #9b9b9b 90%);
+.search-submit {
+    background: linear-gradient(#ebf2ff 0%, #98a0ad 100%);
     background-color: #b7b7b7;
-    border: 1px solid #b7b7b7;
+    border: 1px solid #afb8c6;
     border-radius: 3px;
     color: black;
     cursor: pointer;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 14px;
     margin-top: 10px;
-    padding-bottom: 5px;
-    padding-left: 11px;
-    padding-right: 11px;
-    padding-top: 5px;
-
+    padding: 7px 14px;
 }
 
-.search:hover {
-    background: linear-gradient(#a1a1a1 0%, #e6e6e6 20%, #7d7d7d 90%);
+.search-submit:hover, .search-submit:active, .search-submit:focus {
+    background: linear-gradient(#d0daec 0%, #868f9d 100%);
     background-color: #a1a1a1;
-    border: 1px solid #a1a1a1;
+    border: 1px solid #9aa5b6;
+    outline: 0px solid #9aa5b6;
 }

@@ -51,7 +51,6 @@ public class ItemController {
             model.addAttribute("apiKey", System.getenv("GOOGLE_API_KEY"));
             return "additem";
         }
-
         item.setLatitude(latitude);
         item.setLongitude(longitude);
         Item savedItem = itemService.saveItem(item);
@@ -70,10 +69,8 @@ public class ItemController {
         String currentUser = getCurrentUser();
 
         if (!itemUsername.equals(currentUser)) {
-            // Return "403 Forbidden" error if the requested item doesn't belong to the current user
             throw new AccessDeniedException("403");
         }
-
         List<Image> images = imageService.getItemImages(itemId);
         model.addAttribute("item", item);
         model.addAttribute("images", images);
@@ -90,7 +87,6 @@ public class ItemController {
         String currentUser = getCurrentUser();
 
         if (!itemUsername.equals(currentUser)) {
-            // Return "403 Forbidden" error if the requested item doesn't belong to the current user
             throw new AccessDeniedException("403");
         }
         if (bindingResult.hasErrors()) {
@@ -114,13 +110,11 @@ public class ItemController {
                 model.addAttribute("apiKey", System.getenv("GOOGLE_API_KEY"));
                 return "edititem";
             }
-
             for (MultipartFile file : files) {
                 imageService.saveImage(item, file);
                 storageService.saveFile(item, file);
             }
         }
-
         item.setId(itemId);
         item.setLatitude(latitude);
         item.setLongitude(longitude);
@@ -132,7 +126,6 @@ public class ItemController {
     public String item(@RequestParam("id") int itemId, Model model) {
         Item item = itemService.getItem(itemId);
         List<Image> images = imageService.getItemImages(itemId);
-
         model.addAttribute("item", item);
         model.addAttribute("images", images);
         model.addAttribute("awsUrl", System.getenv("AWS_URL"));
@@ -149,11 +142,8 @@ public class ItemController {
         int imageCount = imageService.countItemImages(itemId);
 
         if (!itemUsername.equals(currentUser) || imageCount == 1) {
-            // Return "403 Forbidden" error if the requested item doesn't belong to the current user or if the user
-            // attempts to remove the item's last image
             throw new AccessDeniedException("403");
         }
-
         imageService.deleteImage(itemId, imageName);
         storageService.deleteFile(itemId, imageName);
         return "redirect:/edititem?id=" + itemId;
@@ -165,17 +155,15 @@ public class ItemController {
         String currentUser = getCurrentUser();
 
         if (!itemUsername.equals(currentUser)) {
-            // Return "403 Forbidden" error if the requested item doesn't belong to the current user
             throw new AccessDeniedException("403");
         }
-
         itemService.deleteItem(itemId);
         storageService.deleteItemFiles(itemId);
         imageService.deleteItemImages(itemId);
         return "redirect:/myaccount";
     }
 
-    public String getCurrentUser() {
+    private String getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return username;
     }

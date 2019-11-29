@@ -11,6 +11,7 @@ import marketplace.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,9 +71,8 @@ public class WebController {
             bindingResult.rejectValue("username", "error.username", "An account with that username already exists");
             return "register";
         }
-
         userService.saveUser(user);
-        model.addAttribute("registerSuccess", "Your account has been created.");
+        model.addAttribute("registered", "Your account has been created.");
         index(model);
         return "index";
     }
@@ -83,15 +83,21 @@ public class WebController {
                           @RequestParam(value = "condition", defaultValue = "all", required = false) String condition,
                           @RequestParam(value = "sort", defaultValue = "relevance", required = false) String sortBy, Model model) {
         List<Item> items = itemService.getItems(keywords, category, condition, sortBy);
-        LinkedHashMap<String, Item> itemsMap = new LinkedHashMap<String, Item>();
+        LinkedHashMap<String, Item> itemsMap = new LinkedHashMap<>();
 
         for (Item item : items) {
             Image image = imageService.getFirstItemImage(item);
             String imageName = image.getName();
             itemsMap.put(imageName, item);
         }
+        String results = items.size() == 1 ? " result for " : " results for ";
+        category = category.equals("all") ? "All Categories" : StringUtils.capitalize(category);
+        String message = keywords.isEmpty() ? category : "\"" + keywords + "\"";
 
         model.addAttribute("keywords", keywords);
+        model.addAttribute("itemCount", items.size());
+        model.addAttribute("results", results);
+        model.addAttribute("message", message);
         model.addAttribute("items", itemsMap);
         model.addAttribute("awsUrl", System.getenv("AWS_URL"));
         model.addAttribute("apiKey", System.getenv("GOOGLE_API_KEY"));

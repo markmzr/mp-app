@@ -25,17 +25,11 @@ public class UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         userRepository.save(user);
-
         Role role = new Role(user.getUsername(), "User");
         roleRepository.save(role);
     }
 
     public Boolean userExists(User user) {
-        if (userRepository.findByUsername(user.getUsername()) != null) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return userRepository.findByUsername(user.getUsername()) != null;
     }
 }

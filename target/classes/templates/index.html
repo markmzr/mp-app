@@ -5,6 +5,8 @@
     <title>Marketplace Web Application</title>
     <link rel="stylesheet" type="text/css" href="css/menu.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
+
+
 </head>
 <body>
 <div class="grid">
@@ -15,7 +17,7 @@
         <span sec:authorize="hasAuthority('User')"><a href="/signout" class="menu-link">Sign Out</a></span>
         <div class="search-bar">
             <form action="/results" method="get">
-                <input type="text" name="keywords" class="keywords" />
+                <input type="text" name="keywords" class="keywords"/>
                 <select name="category" class="category">
                     <option value="all">All Categories</option>
                     <option value="appliances">Appliances</option>
@@ -25,62 +27,106 @@
                     <option value="tools">Tools</option>
                     <option value="vehicles">Vehicles</option>
                 </select>
-                <input type="submit" class="search" value="Search"/>
+                <input type="submit" value="Search" class="search-submit"/>
             </form>
         </div>
     </div>
-    <div class="appliances">
-        <div th:if="${registerSuccess}" class="registerSuccess" th:text="${registerSuccess}"></div>
-        <a href="/results?category=appliances" class="header">Appliances</a>
-        <div th:each="item : ${appliances}" class="item">
-            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
-            <div class="item-name">
-                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+    <div class="main">
+        <div th:if="${registered}" th:text="${registered}" class="registered"></div>
+        <div class="appliances" id="appliances">
+            <div class="header">
+                <a href="/results?category=appliances">Appliances</a>
+            </div>
+            <div class="items">
+                <div th:each="item : ${appliances}" class="item">
+                    <div class="image">
+                        <div th:text="'$' + ${item.value.price}" class="price"></div>
+                        <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+                    </div>
+                    <div class="item-name">
+                        <a th:href="@{'item?id=' + ${item.value.id}}" th:text="${item.value.name}"></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="books">
-        <a href="/results?category=books" class="header">Books</a>
-        <div th:each="item : ${books}" class="item">
-            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
-            <div class="item-name">
-                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+        <div class="books">
+            <div class="header">
+                <a href="/results?category=appliances">Books</a>
+            </div>
+            <div class="items">
+                <div th:each="item : ${books}" class="item">
+                    <div class="image">
+                        <div th:text="'$' + ${item.value.price}" class="price"></div>
+                        <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+                    </div>
+                    <div class="item-name">
+                        <a th:href="@{'item?id=' + ${item.value.id}}" th:text="${item.value.name}"></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="electronics">
-        <a href="/results?category=electronics" class="header">Electronics</a>
-        <div th:each="item : ${electronics}" class="item">
-            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
-            <div class="item-name">
-                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+        <div class="electronics">
+            <div class="header">
+                <a href="/results?category=appliances">Electronics</a>
+            </div>
+            <div class="items">
+                <div th:each="item : ${electronics}" class="item">
+                    <div class="image">
+                        <div th:text="'$' + ${item.value.price}" class="price"></div>
+                        <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+                    </div>
+                    <div class="item-name">
+                        <a th:href="@{'item?id=' + ${item.value.id}}" th:text="${item.value.name}"></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="furniture">
-        <a href="/results?category=furniture" class="header">Furniture</a>
-        <div th:each="item : ${furniture}" class="item">
-            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
-            <div class="item-name">
-                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+        <div class="furniture">
+            <div class="header">
+                <a href="/results?category=appliances">Furniture</a>
+            </div>
+            <div class="items">
+                <div th:each="item : ${furniture}" class="item">
+                    <div class="image">
+                        <div th:text="'$' + ${item.value.price}" class="price"></div>
+                        <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+                    </div>
+                    <div class="item-name">
+                        <a th:href="@{'item?id=' + ${item.value.id}}" th:text="${item.value.name}"></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="tools">
-        <a href="/results?category=tools" class="header">Tools</a>
-        <div th:each="item : ${tools}" class="item">
-            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
-            <div class="item-name">
-                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+        <div class="tools">
+            <div class="header">
+                <a href="/results?category=appliances">Tools</a>
+            </div>
+            <div class="items">
+                <div th:each="item : ${tools}" class="item">
+                    <div class="image">
+                        <div th:text="'$' + ${item.value.price}" class="price"></div>
+                        <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+                    </div>
+                    <div class="item-name">
+                        <a th:href="@{'item?id=' + ${item.value.id}}" th:text="${item.value.name}"></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="vehicles">
-        <a href="/results?category=vehicles" class="header">Vehicles</a>
-        <div th:each="item : ${vehicles}" class="item">
-            <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
-            <div class="item-name">
-                <a th:href="@{'item?id=' + ${item.value.id}}" th:text="'$' + ${item.value.price} + ' - ' + ${item.value.name}"></a>
+        <div class="vehicles">
+            <div class="header">
+                <a href="/results?category=appliances">Vehicles</a>
+            </div>
+            <div class="items">
+                <div th:each="item : ${vehicles}" class="item">
+                    <div class="image">
+                        <div th:text="'$' + ${item.value.price}" class="price"></div>
+                        <a th:href="@{'/item?id=' + ${item.value.id}}"><img th:src="${awsUrl} + ${item.key}"></a>
+                    </div>
+                    <div class="item-name">
+                        <a th:href="@{'item?id=' + ${item.value.id}}" th:text="${item.value.name}"></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,9 +1,9 @@
 package marketplace.services;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.DeleteObjectsRequest;
 import com.amazonaws.services.s3.model.DeleteObjectsRequest.KeyVersion;
-import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,7 +37,12 @@ public class StorageService {
         stream.write(multipartFile.getBytes());
         stream.close();
 
-        s3.putObject(new PutObjectRequest(System.getenv("BUCKET_NAME"), filename, file));
+        try {
+            String bucket = System.getenv("BUCKET_NAME");
+            s3.putObject(bucket, filename, file);
+        } catch (AmazonServiceException e) {
+            e.printStackTrace();
+        }
         file.delete();
     }
 
@@ -49,12 +54,11 @@ public class StorageService {
     public void deleteItemFiles(int itemId) {
         List<Image> images = imageRepository.findByItemId(itemId);
         DeleteObjectsRequest deleteRequest = new DeleteObjectsRequest(System.getenv("BUCKET_NAME"));
-        List<KeyVersion> keys = new ArrayList<KeyVersion>();
+        List<KeyVersion> keys = new ArrayList<>();
 
         for (Image image: images) {
             keys.add(new KeyVersion(image.getName()));
         }
-
         deleteRequest.setKeys(keys);
         s3.deleteObjects(deleteRequest);
     }
