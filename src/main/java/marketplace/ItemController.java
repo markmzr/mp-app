@@ -164,7 +164,6 @@ public class ItemController {
     }
 
     private String getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return username;
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

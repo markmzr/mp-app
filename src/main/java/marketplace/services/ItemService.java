@@ -87,6 +87,10 @@ public class ItemService {
         return itemRepository.findByUsernameOrderByDateDesc(username);
     }
 
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
+
     public Item saveItem(Item item) {
         String username = getUsername();
         item.setUsername(username);

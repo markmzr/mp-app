@@ -13,6 +13,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer>, QuerydslPr
 
     void deleteById(int id);
     Item findById(int id);
+    List<Item> findAll();
     List<Item> findByUsernameOrderByDateDesc(String username);
     Item save(Item item);
 }
